@@ -1,0 +1,56 @@
+body
+{
+	background-color: #526A85;
+	text-align: center;
+	margin: 0;
+}
+#Banner
+{
+	background-color: white;
+	text-align: center;
+	z-index: 101;
+	margin-top: 0%;
+	font-size: 145%;
+	width: 110%;
+	margin-left: -7%;
+	margin-top: auto;
+	padding: 2.5%;
+	position: fixed;
+	box-shadow: rgba(0, 0, 0, 0.75) 0 5px 35px;
+	color: #CA1E15;
+}
+#Scores
+{
+	border: 5px solid #B39B6A;
+	margin-top: 15%;
+	padding: 5%;
+	border-radius: 5px;
+	background-color: #EFC36C;
+	
+}
+#Pro
+{
+	border: 5px solid #B39B6A;
+	border-radius: 15px;
+	display: inline-block;
+	padding: 2%;
+	margin: 2%;
+	background-color: #F7DEAD;
+}
+#Con
+{
+	border: 5px solid #B39B6A;
+	border-radius: 15px;
+	display: inline-block;
+	padding: 2%;
+	margin: 2%;
+	background-color: #F7DEAD;
+}
+#Circle
+{
+	border-radius: 100%;
+	border: 2px solid #B39B6A;
+	padding: 2%;
+	display: inline-block;
+	background-color: #F7DEAD;
+}

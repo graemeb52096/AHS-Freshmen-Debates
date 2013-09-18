@@ -1,0 +1,21 @@
+body
+{
+	background-color: #526A85;
+	text-align: center;
+	margin: 0;
+}
+#Banner
+{
+	background-color: white;
+	text-align: center;
+	z-index: 101;
+	margin-top: 0%;
+	font-size: 145%;
+	width: 110%;
+	margin-left: -7%;
+	margin-top: auto;
+	padding: 2.5%;
+	position: fixed;
+	box-shadow: rgba(0, 0, 0, 0.75) 0 5px 35px;
+	color: #CA1E15;
+}

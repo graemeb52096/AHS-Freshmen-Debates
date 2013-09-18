@@ -1,0 +1,44 @@
+body
+{
+	background-color: #526A85;
+	text-align: center;
+}
+#Banner
+{
+	background-color: #4E4E4E;
+	text-align: center;
+	margin-top: 0%;
+	font-size: 275%;
+	width: 110%;
+	margin-left: -10%;
+	margin-top: -1%;
+	padding: 1.5%;
+	position: fixed;
+	box-shadow: rgba(0, 0, 0, 0.75) 0 5px 35px;
+}
+#MainBody
+{
+	background-color: #CCB976;
+	height: 80%;
+	width: 80%;
+	margin-top: 0%;
+	margin-bottom: 0%;
+	box-shadow: rgba(0, 0, 0, 0.75) 0 10px 35px;
+	display: inline-block;
+	padding-top: 25%;
+}
+#Select
+{
+	font-size: 250%;
+	border: 2px solid black;
+	border-radius: 25px;
+	display: inline-block;
+	background-color: #829DBA;
+	margin: 2.5%;
+	padding: 10px;
+	width: 25%;
+}
+#Select:hover
+{
+	box-shadow: rgba(0, 0, 0, 0.75) 0 10px 35px;
+}
