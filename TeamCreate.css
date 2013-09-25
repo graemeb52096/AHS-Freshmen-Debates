@@ -1,0 +1,44 @@
+body
+{
+	background-color: #F7DEAD;
+	text-align: center;
+	margin: 0;
+}
+#Banner
+{
+	background-color: white;
+	text-align: center;
+	z-index: 101;
+	margin-top: 0%;
+	font-size: 145%;
+	width: 110%;
+	margin-left: -7%;
+	margin-top: auto;
+	padding: 2.5%;
+	position: fixed;
+	box-shadow: rgba(0, 0, 0, 0.75) 0 5px 35px;
+	color: #CA1E15;
+}
+#NewDebate
+{
+	border: 5px solid #829DBA;
+	display: inline-block;
+	padding: 5%;
+	margin: 15%;
+	font-size: 100%;
+	border-radius: 25px;
+	background-color: #EFC36C;
+	text-align: right;
+}
+a
+{
+	text-decoration: none;
+	font-size: 100%;
+}
+a:hover
+{
+	color: red;
+}
+h1{
+	font-size: 250%;
+}

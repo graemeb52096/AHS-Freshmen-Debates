@@ -1,0 +1,109 @@
+body
+{
+	background-color: #526A85;
+	text-align: center;
+	margin: 0;
+}
+h1
+{
+	font-size: 125%;
+}
+h2
+{
+	font-size: 80%;
+	font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+#LogIn
+{
+	font-size: 150%;
+	color: black;
+	background-color: #F7DEAD;
+	border-radius: 30px;
+	border: 5px solid #EFC36C;
+	width:10%;
+	display: inline-block;
+	padding: 1%;
+}
+#LogIn:hover
+{
+	border: 5px solid #B39B6A;
+}
+#Banner
+{
+	background-color: white;
+	text-align: center;
+	z-index: 101;
+	margin-top: 0%;
+	font-size: 145%;
+	width: 110%;
+	margin-left: -7%;
+	margin-top: auto;
+	padding: 2.5%;
+	position: fixed;
+	box-shadow: rgba(0, 0, 0, 0.75) 0 5px 35px;
+	color: #CA1E15;
+}
+#MainBody
+{	
+	text-align: center;
+	margin-bottom: 5%;
+	z-index: 100;
+	background-color: #EFC36C;
+	height: 80%;
+	width: 70%;
+	margin-top: 0%;
+	margin-bottom: 0%;
+	margin-left: auto;
+	margin-right: auto;
+	box-shadow: rgba(0, 0, 0, 0.75) 0 10px 35px;
+	display: inline-block;
+	padding-top: 20%;
+}
+#NewDebateTeam
+{
+	border: 10px solid #F7DEAD;
+	border-radius: 25px;
+	display: inline-block;
+	background-color: #B39B6A;
+	margin: 1%;
+	padding-left: 10px;
+	padding-right: 10px;
+	width: 23%;
+	height: 25%;
+}
+#DebateScores
+{
+	border: 10px solid #F7DEAD;
+	border-radius: 25px;
+	display: inline-block;
+	background-color: #B39B6A;
+	margin: 1%;
+	padding-left: 10px;
+	padding-right: 10px;
+	width: 23%;
+	height: 25%;
+}
+#SelectT
+{
+	border: 10px solid #F7DEAD;
+	border-radius: 25px;
+	display: inline-block;
+	background-color: #B39B6A;
+	margin: 1%;
+	padding-left: 10px;
+	padding-right: 10px;
+	width: 23%;
+	height: 25%;
+}
+#DebateScores:hover
+{
+	box-shadow: rgba(0, 0, 0, 0.75) 0 10px 35px;
+}
+#NewDebateTeam:hover
+{
+	box-shadow: rgba(0, 0, 0, 0.75) 0 10px 35px;
+}
+#SelectJ:hover
+{
+	box-shadow: rgba(0, 0, 0, 0.75) 0 10px 35px;
+}

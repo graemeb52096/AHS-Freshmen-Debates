@@ -6,12 +6,12 @@
 	}
 	else
 	{
-		document.write('<link rel="stylesheet" type="text/css" href="Splashpage.css">');
+		document.write('<link rel="stylesheet" type="text/css" href="TeacherSelector.css">');
 	}
 </script>
 
 <head>
-	<title>Splash Page</title>
+	<title>Teacher</title>
 </head>
 <body>
 	<div id="Banner">
@@ -19,44 +19,36 @@
 	</div>
 	<div id="MainBody">
 
-		<div id="SelectT">
-			<h1>Teachers</h1>
+		<div id="NewDebateTeam">
+			<h1>Create new team</h1>
 			<br>
-			<h2>Manage debate teams, check grades and upcoming debates.</h2>
-			<br>
-		</div>
-		<div id="SelectA">
-			<h1>Admin</h1>
-			<br>
-			<h2>Ms. O, log in here to manage debates and organize everything.</h2>
+			<h2>Click to add new debate teams</h2>
 			<br>
 		</div>
-		<div id="SelectJ">
-			<h1>Judges</h1>
+		<div id="DebateScores">
+			<h1>Scores</h1>
 			<br>
-			<h2>Judge debates, view and manage debates you will judge.</h2>
+			<h2>Click to view your teams scores.</h2>
 			<br>
 		</div>
-		<br>
-		<br>
-		<br>
+
 
 	</div>
 
 	
 	<script type="text/javascript">
-		var something = document.getElementById('SelectA');
+		var something = document.getElementById('NewDebateTeam');
 
 		something.style.cursor = 'pointer';
 		something.onclick = function() {
-			window.open ('Admin.html','_self',false)
+			window.open ('TeamCreate.html','_self',false)
 		};
 
-		var something = document.getElementById('SelectT');
+		var something = document.getElementById('DebateScores');
 
 		something.style.cursor = 'pointer';
 		something.onclick = function() {
-			window.open ('TeacherSelector.html','_self',false)
+			window.open ('Teacher.html','_self',false)
 		};
 
 		var something = document.getElementById('SelectJ');
