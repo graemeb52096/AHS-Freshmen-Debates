@@ -6,7 +6,7 @@
 	}
 	else
 	{
-		document.write('<link rel="stylesheet" type="text/css" href="Admin.css">');
+		document.write('<link rel="stylesheet" type="text/css" href="DebateSite.css">');
 	}
 </script>
 
@@ -14,18 +14,18 @@
 	<title>Admin</title>
 </head>
 <body>
-	<div id="Banner">
+	<div class="Banner">
 		Albany High School Freshmen Debates
 	</div>
 	<div id="MainBody">
 
-		<div id="NewDebateButton">
+		<div id="NewDebate" class="Button">
 			<h1>Create new debate</h1>
 			<br>
 			<h2>Click to add new debate</h2>
 			<br>
 		</div>
-		<div id="ManageDebates">
+		<div id="ManageDebates" class="Button">
 			<h1>Existing Debates</h1>
 			<br>
 			<h2>Click to manage debates</h2>
@@ -37,7 +37,7 @@
 
 	
 	<script type="text/javascript">
-		var something = document.getElementById('NewDebateButton');
+		var something = document.getElementById('NewDebate');
 
 		something.style.cursor = 'pointer';
 		something.onclick = function() {
