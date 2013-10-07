@@ -31,6 +31,12 @@
 			<h2>Click to manage debates</h2>
 			<br>
 		</div>
+		<div id="DebateSchedule" class="Button">
+			<h1>Team Schedule</h1>
+			<br>
+			<h2>Click to create team schedules</h2>
+			<br>
+		</div>
 
 
 	</div>
@@ -49,6 +55,13 @@
 		something.style.cursor = 'pointer';
 		something.onclick = function() {
 			window.open ('DebateManager.html','_self',false)
+		};
+
+		var something = document.getElementById('DebateSchedule');
+
+		something.style.cursor = 'pointer';
+		something.onclick = function() {
+			window.open ('TeamSchedule.html','_self',false)
 		};
 
 		var something = document.getElementById('SelectJ');
