@@ -1,44 +1,42 @@
 <html>
 <link rel="stylesheet" type="text/css" href="DebateSite.css">
 <body>
-	<div class="Banner">
-		Albany High School Freshmen Debates
-	</div>
+  <div class="Banner">
+    Albany High School Freshmen Debates
+  </div>
 
-	<br>
-	<br>
+  <br>
+  <br>
 
-	<div id="DebateForm">
-		<form>
-			Debate Topic: <input type="text" name="DebateTopic">
-			<br>
-			Affirmative Team Name: <input type="text" name="Affirmative">
-			<br>
-			Negative Team Name: <input type="text" name="Negative">
-			<br>
-			Debate Date: <input type="date" name="debateDate">
-			<br>
-			Debate Period: 
-			<select name="Period">
-				<option value="Period1">Period1</option>
-				<option value="Period2">Period2</option>
-				<option value="Period3">Period3</option>
-				<option value="Period4">Period4</option>
-				<option value="Period5">Period5</option>
-				<option value="Period6">Period6</option>
-				<option value="Period7">Period7</option>
-			</select>
-			<br>
-			Debate Location: 
-			<select name="Location">
-				<option value="Location1">Location1</option>
-				<option value="Location2">Location2</option>
-				<option value="Location3">Location3</option>
-				<option value="Location4">Location4</option>
-			</select>
-			<br>
-		</form>
-	</div>
+  <table id = "DebateForm">
+    <tr>
+      <th>Debate Topic</th>
+      <th>Affirmative Team Name</th>
+      <th>Negative Team Name</th>
+      <th>Debate Date</th>
+      <th>Debate Period</th>
+      <th>Debate Location</th>
+    </tr>
+
+    <tr>
+      <th><input type="text" name="DebateTopic"></th>
+      <th><input type="text" name="Affirmative"></th>
+      <th><input type="text" name="Negative"></th>
+      <th><input type="date" name="DebateDate"></th>
+      <th>
+        <select name="Period">
+          <option value="Period1">Period1</option>
+          <option value="Period2">Period2</option>
+          <option value="Period3">Period3</option>
+          <option value="Period4">Period4</option>
+          <option value="Period5">Period5</option>
+          <option value="Period6">Period6</option>
+          <option value="Period7">Period7</option>
+        </select>
+      </th>
+      <th><input type="text" name="DebateLocation"></th>
+    </tr>
+  </table>
 
 </body>
 

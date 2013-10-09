@@ -25,6 +25,19 @@ h5
 {
 	font-size: 150%;
 }
+
+table{
+	border: 1px solid black;
+}
+
+td {
+	border: 1px solid black;
+}
+
+th{
+	border: 1px solid black;
+}
+
 .Banner
 {
 	background-color: white;
