@@ -8,39 +8,16 @@ LOCATION_CHOICES = ('Library', 'Little_Theatre', 'Other_Location')
 
 # Create your models here.
 
-class Topics(models.Model):
+class Topic(models.Model):
 	topic = models.CharField(max_length=255)
 
 
-	class Meta:
-				ordering = ['-topic']
-
-	def __unicode__(self):
-				return u'%s' % self.topic
-
-	def get_absolute_url(self):
-				return reverse('debates.views.debates',args=[self.date])
-
-class debatelocations(models.Model):
+class Location(models.Model):
 	location = models.CharField(max_length=255)
 
-	class Meta:
-				ordering = ['-location']
-
-	def __unicode__(self):
-				return u'%s' % self.location
-
-	def get_absolute_url(self):
-				return reverse('debates.views.debates',args=[self.date])
-
-class debatedates(models.Model):
+	
+class Date(models.Model):
 	dates = models.CharField(max_length=255)
 
-	class Meta:
-				ordering = ['-location']
-
-	def __unicode__(self):
-				return u'%s' % self.location
-
-	def get_absolute_url(self):
-				return reverse('debates.views.debates',args=[self.date])
+class Teacher(models.Model):
+	dates = models.CharField(max_length=255)
