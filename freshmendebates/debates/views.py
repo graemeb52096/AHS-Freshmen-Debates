@@ -1,16 +1,17 @@
 from django.shortcuts import render, get_object_or_404
-from blog.models import debate
+from debates.models import debatetopic
+from debates.models import debatelocations
+from debates.models import debatedates
 
 # Create your views here.
 
 def judge(request):
 	#get the debates that are on
-	debate = debate.objects.filter(date=Today)
+	debate = debatetopic.objects.filter()
 	#Now return the rendered template
-	return render(request,'debates/judge.html',{'debate': debate})
-
-def summary(request, date, period, location):
-	#Get summary of debate times and locations
-	debate = get_object_or_404(debate, date=date, period=period, location=location)
+	return render(request,'debates/judge.html',{'debatetopic': debatetopic})
+def debates(request):
+	#get the debates that are on
+	debate = debatetopic.objects.filter(debatetopic, topic=topic)
 	#Now return the rendered template
-	return render(request, 'debates/summary.html', {'debate':debate})
+	return render(request,'debates/judge.html',{'debatetopic': debatetopic})

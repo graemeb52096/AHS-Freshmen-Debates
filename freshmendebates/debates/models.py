@@ -8,19 +8,39 @@ LOCATION_CHOICES = ('Library', 'Little_Theatre', 'Other_Location')
 
 # Create your models here.
 
-class debate(models.MODEL):
+class Topics(models.Model):
 	topic = models.CharField(max_length=255)
-	affirmative_team_name = models.CharField(unique = True, max_length=255)
-	negative_team_name = models.CharField(unique = True, max_length=255)
-	period = models.CharField(max_length=2, choices=PERIOD_CHOICES)
-	date = models.DateField(widget=SelectDateWidget(days=DEBATE_DAY_CHOICES))
-	location = models.CharField(max_length=255, choices=LOCATION_CHOICES)
 
-	class Ordering:
-				ordering = ['-date']
+
+	class Meta:
+				ordering = ['-topic']
 
 	def __unicode__(self):
 				return u'%s' % self.topic
+
+	def get_absolute_url(self):
+				return reverse('debates.views.debates',args=[self.date])
+
+class debatelocations(models.Model):
+	location = models.CharField(max_length=255)
+
+	class Meta:
+				ordering = ['-location']
+
+	def __unicode__(self):
+				return u'%s' % self.location
+
+	def get_absolute_url(self):
+				return reverse('debates.views.debates',args=[self.date])
+
+class debatedates(models.Model):
+	dates = models.CharField(max_length=255)
+
+	class Meta:
+				ordering = ['-location']
+
+	def __unicode__(self):
+				return u'%s' % self.location
 
 	def get_absolute_url(self):
 				return reverse('debates.views.debates',args=[self.date])
