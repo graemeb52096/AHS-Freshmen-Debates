@@ -1,11 +1,13 @@
 from django.conf.urls import patterns, include, url
-# Uncomment the next two lines to enable the admin:
+
+# Comment the next two lines to disable the admin:
 from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
 
-	
+	url(r'^$','debates.views.judge'),
+	url(r'^post/scoring_upload.html$', 'debates.views.judge', name='judging'),
     # Examples:
     # url(r'^$', 'freshmendebates.views.home', name='home'),
     # url(r'^freshmendebates/', include('freshmendebates.foo.urls')),
