@@ -6,8 +6,10 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
 
-	url(r'^$','debates.views.judge'),
-	url(r'^post/scoring_upload.html$', 'debates.views.judge', name='judging'),
+	url(r'^$','debates.views.Aff'),
+	url(r'^$','debates.views.Neg'),
+	url(r'^post/Affscoring_upload.html$', 'debates.views.Aff', name='judging'),
+	url(r'^post/Negscoring_upload.html$', 'debates.views.Neg', name='judging'),   
     # Examples:
     # url(r'^$', 'freshmendebates.views.home', name='home'),
     # url(r'^freshmendebates/', include('freshmendebates.foo.urls')),

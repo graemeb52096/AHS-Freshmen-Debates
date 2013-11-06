@@ -22,7 +22,7 @@
 				<h1>Affirmative</h1>
 				<br>
 
-				    <form action='/post/scoring_upload.html' method='post'>
+				    <form action='/post/Affscoring_upload.html' method='post'>
 				    {% csrf_token %}
 					<br>
 					<br>
@@ -38,90 +38,15 @@
 				
 				<h1>Negative</h1>
 				<br>
-					<form>
+					<form action='/post/Negscoring_upload.html' method='post'>
+				    {% csrf_token %}
 					<br>
 					<br>
-					
+					<ul>
+					{{ form.as_p }}
+					</ul>
+					<input type='submit' value='Submit' />
 
-					<input type="radio" id="radio-01" name="SlideShowScore" value="5">
-					<label for="radio-01">5</label>
-					<input type="radio" id="radio-02" name="SlideShowScore" value="6">
-					<label for="radio-02">6</label>
-					<input type="radio" id="radio-03" name="SlideShowScore" value="7">
-					<label for="radio-03">7</label>
-					<input type="radio" id="radio-04" name="SlideShowScore" value="8">
-					<label for="radio-04">8</label>
-					<input type="radio" id="radio-05" name="SlideShowScore" value="9">
-					<label for="radio-05">9</label>
-					<input type="radio" id="radio-06" name="SlideShowScore" value="10">
-					<label for="radio-06">10</label>
-					&nbsp; :Slideshow 
-					<br>
-					<br>
-
-					<input type="radio" id="radio-11" name="Speaker1" value="5">
-					<label for="radio-11">5</label>
-					<input type="radio" id="radio-12" name="Speaker1" value="6">
-					<label for="radio-12">6</label>
-					<input type="radio" id="radio-13" name="Speaker1" value="7">
-					<label for="radio-13">7</label>
-					<input type="radio" id="radio-14" name="Speaker1" value="8">
-					<label for="radio-14">8</label>
-					<input type="radio" id="radio-15" name="Speaker1" value="9">
-					<label for="radio-15">9</label>
-					<input type="radio" id="radio-16" name="Speaker1" value="10">
-					<label for="radio-16">10</label>
-					&nbsp; :Speaker 1
-					<br>
-					<br>
-
-					<input type="radio" id="radio-21" name="Speaker2" value="5">
-					<label for="radio-21">5</label>
-					<input type="radio" id="radio-22" name="Speaker2" value="6">
-					<label for="radio-22">6</label>
-					<input type="radio" id="radio-23" name="Speaker2" value="7">
-					<label for="radio-23">7</label>
-					<input type="radio" id="radio-24" name="Speaker2" value="8">
-					<label for="radio-24">8</label>
-					<input type="radio" id="radio-25" name="Speaker2" value="9">
-					<label for="radio-25">9</label>
-					<input type="radio" id="radio-26" name="Speaker2" value="10">
-					<label for="radio-26">10</label>
-					&nbsp; :Speaker 2
-					<br>
-					<br>
-
-					<input type="radio" id="radio-31" name="CrossExamination" value="5">
-					<label for="radio-31">5</label>
-					<input type="radio" id="radio-32" name="CrossExamination" value="6">
-					<label for="radio-32">6</label>
-					<input type="radio" id="radio-33" name="CrossExamination" value="7">
-					<label for="radio-33">7</label>
-					<input type="radio" id="radio-34" name="CrossExamination" value="8">
-					<label for="radio-34">8</label>
-					<input type="radio" id="radio-35" name="CrossExamination" value="9">
-					<label for="radio-35">9</label>
-					<input type="radio" id="radio-36" name="CrossExamination" value="10">
-					<label for="radio-36">10</label>
-					&nbsp; :Cross Examination 
-					<br>
-					<br>
-
-					<input type="radio" id="radio-41" name="Argument" value="5">
-					<label for="radio-41">5</label>
-					<input type="radio" id="radio-42" name="Argument" value="6">
-					<label for="radio-42">6</label>
-					<input type="radio" id="radio-43" name="Argument" value="7">
-					<label for="radio-43">7</label>
-					<input type="radio" id="radio-44" name="Argument" value="8">
-					<label for="radio-44">8</label>
-					<input type="radio" id="radio-45" name="Argument" value="9">
-					<label for="radio-45">9</label>
-					<input type="radio" id="radio-46" name="Argument" value="10">
-					<label for="radio-46">10</label>
-					&nbsp; :Argument 
-					<br>
-					<br>
 				</form>
 			</div>
 
