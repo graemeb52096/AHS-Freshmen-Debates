@@ -1,5 +1,7 @@
 <html>
+<head>
 <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}DebateSite.css">
+</head>
 <body>
 <div class="Banner">
 		Albany High School Freshmen Debates
@@ -22,14 +24,14 @@
 				<h1>Affirmative</h1>
 				<br>
 
-				    <form action='/post/Affscoring_upload.html' method='post'>
+				    <form method='post'>
 				    {% csrf_token %}
 					<br>
 					<br>
 					<ul>
-					{{ form.as_p }}
+					{{ form1.as_p }}
 					</ul>
-					<input type='submit' value='Submit' />
+					<input type='submit' name='form_Positive' value='Submit_Postitive' />
 
 				</form>
 			</div>
@@ -38,14 +40,14 @@
 				
 				<h1>Negative</h1>
 				<br>
-					<form action='/post/Negscoring_upload.html' method='post'>
+					<form method='post'>
 				    {% csrf_token %}
 					<br>
 					<br>
 					<ul>
-					{{ form.as_p }}
+					{{ form2.as_p }}
 					</ul>
-					<input type='submit' value='Submit' />
+					<input type='submit' name='form_Negative' value='Submit_Negative' />
 
 				</form>
 			</div>

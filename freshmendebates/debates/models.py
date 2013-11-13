@@ -7,22 +7,21 @@ PERIOD_CHOICES = ('1', '2', '3', '4', '5', '6', '7')
 LOCATION_CHOICES = ('Library', 'Little_Theatre', 'Other_Location')
 
 SCORE_CHOICES = (
-        (5, '5'),
-        (6, '6'),
-        (7, '7'),
-        (8, '8'),
-        (9, '9'),
-        (10, '10'),
+        ('5', '5'),
+        ('6', '6'),
+        ('7', '7'),
+        ('8', '8'),
+        ('9', '9'),
+        ('10', '10'),
     )
 
 # Create your models here.
-class Affirmative(models.Model):
-	SlideShowScore = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
+class Affirmative(models.Model):	
 	Speaker1 = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
 	Speaker2 = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
 	CrossExamination = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
 	Argument = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
-
+	SlideShowScore = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
 
 class Negative(models.Model):
 	SlideShowScore = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
