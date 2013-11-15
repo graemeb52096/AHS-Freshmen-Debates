@@ -1,16 +1,10 @@
 
 <html>
 <script type="text/javascript">
-	if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-		document.write('<link rel="stylesheet" type="text/css" href="SplashpageMobile.css">');
-	}
-	else
-	{
-		document.write('<link rel="stylesheet" type="text/css" href="DebateSite.css">');
-	}
 </script>
 
 <head>
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}DebateSite.css">
 	<title>Teacher</title>
 </head>
 <body>
@@ -39,28 +33,28 @@
 
 		something.style.cursor = 'pointer';
 		something.onclick = function() {
-			window.open ('TeamCreate.html','_self',false)
+			window.open ('TeamCreate','_self',false)
 		};
 
 		var something = document.getElementById('DebateScores');
 
 		something.style.cursor = 'pointer';
 		something.onclick = function() {
-			window.open ('Teacher.html','_self',false)
+			window.open ('Teacher','_self',false)
 		};
 
 		var something = document.getElementById('SelectJ');
 
 		something.style.cursor = 'pointer';
 		something.onclick = function() {
-			window.open ('DebateSelector.html','_self',false)
+			window.open ('DebateSelector','_self',false)
 		};
 
 		var something = document.getElementById('LogIn');
 
 		something.style.cursor = 'pointer';
 		something.onclick = function() {
-			window.open ('LogIn.html','_self',false)
+			window.open ('LogIn','_self',false)
 		};
 	</script>
 

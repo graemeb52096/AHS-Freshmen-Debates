@@ -1,6 +1,28 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}DebateSite.css">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+	jQuery(function() {
+
+		var form = jQuery("Form_Response")
+		form.submit(function(e){
+			jQuery("#sendbutton").attr('disabled', true)
+			jQuery("#sendwrapper").prepend('<span>Sending message, please wait... </span>')
+			jQuery("#ajaxwrapper").load(
+				form.attr('action') + ' #ajaxwrapper',
+				form.serializeArray(),
+				function(responseText, responseStatus) {
+					jQuery("#sendbutton").attr('disabled', false)
+				}
+
+			);
+			e.preventDefault();
+		});
+	});
+
+</script>
 </head>
 <body>
 <div class="Banner">
@@ -25,14 +47,15 @@
 				<br>
 
 				    <form method='post'>
-				    {% csrf_token %}
-					<br>
-					<br>
-					<ul>
-					{{ form1.as_p }}
-					</ul>
-					<input type='submit' name='form_Positive' value='Submit_Postitive' />
-
+				    <div id="ajaxwrapper">
+				    	{% csrf_token %}
+						<br>
+						<br>
+						<ul>
+						{{ form1.as_p }}
+						</ul>
+						<p id="sendwrapper"><input type='submit' name='form_Positive' value='Submit_Postitive' /></p>
+					</div>
 				</form>
 			</div>
 

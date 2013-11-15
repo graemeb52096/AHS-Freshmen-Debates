@@ -59,7 +59,7 @@ th{
 	margin-bottom: 5%;
 	z-index: 100;
 	background-color: #B4B2AE;
-	height: 80%;
+	height: 58%;
 	width: 70%;
 	margin-top: 0%;
 	margin-bottom: 0%;
@@ -79,7 +79,7 @@ th{
 	padding-left: 10px;
 	padding-right: 10px;
 	width: 25%;
-	height: 25%;
+	height: 35%;
 }
 .Button:hover
 {
@@ -106,14 +106,15 @@ th{
 /*Start of divs for DebateCreate.html*/
 #DebateForm
 {
-	border: 10px solid #F7DEAD;
-	display: inline-block;
-	padding: 5%;
-	margin: 15%;
-	font-size: 100%;
-	border-radius: 25px;
-	background-color: #EFC36C;
+	padding: 2%;
+	background-color: #F2EEEA;
 	text-align: left;
+	border: 10px solid #B4B2AE;
+	display: inline-block;
+	margin: 2.5%;
+	border-radius:;
+	height: auto;
+	width: auto;
 }
 /*End of divs for DebateCreate.html*/
 
@@ -152,10 +153,7 @@ th{
 	text-align: center;
 
 }
-#DebateForm
-{
-	border: 2px solid black;
-}
+
 /*End of divs for Teacher.html*/
 input[type=radio] {
     display:none;

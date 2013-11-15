@@ -5,7 +5,12 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
 
-	url(r'^$','debates.views.judge'),
+	url(r'^Judge$','debates.views.judge'),
+	url(r'^SplashPage$','debates.views.splash'),
+	url(r'^Teacher$','debates.views.teacher'),
+	url(r'^TeacherSelector$','debates.views.teacherselector'),
+	url(r'^TeamCreate$','debates.views.teamcreate'),
+	url(r'^DebateSelector$','debates.views.debateselector'),
 	url(r'^post/scoring_upload.html$', 'debates.views.handle', name='judging'), 
     # Examples:
     # url(r'^$', 'freshmendebates.views.home', name='home'),
