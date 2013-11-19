@@ -31,3 +31,16 @@ class NegativeScore(ModelForm):
 		Argument = scores.choices
 		class Meta:
 			model = Negative
+
+# class Team(ModelForm):
+# 		DebateTopic = 
+# 		Side = 
+# 		TeamNumber = 
+# 		TeamName = 
+# 		SlideShowSpeaker = 
+# 		Speaker1 = 
+# 		Speaker2 = 
+# 		CrossExamination = 
+# 		Rebuttal = 
+# 		class Meta:
+# 			model = Team

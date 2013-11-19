@@ -24,11 +24,13 @@ class Affirmative(models.Model):
 	SlideShowScore = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
 
 class Negative(models.Model):
-	SlideShowScore = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
 	Speaker1 = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
 	Speaker2 = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
 	CrossExamination = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
 	Argument = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
+	SlideShowScore = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
+
+# class Team():
 
 class Topic(models.Model):
 	topic = models.CharField(max_length=255)

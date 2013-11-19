@@ -150,7 +150,33 @@ LOGGING = {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
+        },
+        'dev_debug':{
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': '/AHS-Freshmen-Debates/freshmendebates/Logs/debug.log'
+        },
+        'dev_info':{
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': '/AHS-Freshmen-Debates/freshmendebates/Logs/info.log'
+        },
+        'dev_warning':{
+            'level': 'WARNING',
+            'class': 'logging.FileHandler',
+            'filename': '/AHS-Freshmen-Debates/freshmendebates/Logs/warning.log'
+        },
+        'dev_error':{
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': '/AHS-Freshmen-Debates/freshmendebates/Logs/error.log'
+        },
+        'dev_critical':{
+            'level': 'CRITICAL',
+            'class': 'logging.FileHandler',
+            'filename': '/AHS-Freshmen-Debates/freshmendebates/Logs/critical.log'
         }
+
     },
     'loggers': {
         'django.request': {
@@ -158,5 +184,30 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
+        'logview.debugger': {
+            'handlers': ['dev_debug'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'logview.info': {
+            'handlers': ['dev_info'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'logview.warning': {
+            'handlers': ['dev_warning'],
+            'level': 'WARNING',
+            'propagate': True,
+        },
+        'logview.error': {
+            'handlers': ['dev_error'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+        # 'logview.critical': {
+        #     'handlers': ['dev_critical'],r
+        #     'level': 'CRITICAL',
+        #     'propagate': True,
+        # },
     }
 }

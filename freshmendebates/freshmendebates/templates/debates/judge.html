@@ -3,16 +3,35 @@
 <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}DebateSite.css">
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
 <script type="text/javascript">
+	jQuery(function() {
+
+			var form_Negative = jQuery("#form_Negative")
+			console.log (form_Negative)
+			form_Negative.submit(function(e){
+				jQuery("#sendbutton").attr('disabled', true)
+				jQuery("#sendwrapper").prepend('<span>Sending message, please wait... </span>')
+				jQuery("#ajaxwrapper").load(
+					form_Negative.attr('action') + ' #ajaxwrapper',
+					form_Negative.serializeArray(),
+					function(responseText, responseStatus) {
+						jQuery("#sendbutton").attr('disabled', false)
+					}
+
+				);
+				e.preventDefault();
+			});
+		});
 
 	jQuery(function() {
 
-		var form = jQuery("Form_Response")
-		form.submit(function(e){
+		var form_Positive = jQuery("#form_Positive")
+		console.log (form_Positive)
+		form_Positive.submit(function(e){
 			jQuery("#sendbutton").attr('disabled', true)
 			jQuery("#sendwrapper").prepend('<span>Sending message, please wait... </span>')
 			jQuery("#ajaxwrapper").load(
-				form.attr('action') + ' #ajaxwrapper',
-				form.serializeArray(),
+				form_Postive.attr('action') + ' #ajaxwrapper',
+				form_Positive.serializeArray(),
 				function(responseText, responseStatus) {
 					jQuery("#sendbutton").attr('disabled', false)
 				}
@@ -21,7 +40,6 @@
 			e.preventDefault();
 		});
 	});
-
 </script>
 </head>
 <body>
@@ -46,15 +64,15 @@
 				<h1>Affirmative</h1>
 				<br>
 
-				    <form method='post'>
+				    <form method='post' id="form_Positive">
 				    <div id="ajaxwrapper">
 				    	{% csrf_token %}
 						<br>
 						<br>
 						<ul>
-						{{ form1.as_p }}
+						{{ Affirmative_Form.as_p }}
 						</ul>
-						<p id="sendwrapper"><input type='submit' name='form_Positive' value='Submit_Postitive' /></p>
+						<p id="sendwrapper"><input type='submit' name='form_Positve' value='Submit_Positive' /></p>
 					</div>
 				</form>
 			</div>
@@ -63,15 +81,16 @@
 				
 				<h1>Negative</h1>
 				<br>
-					<form method='post'>
-				    {% csrf_token %}
-					<br>
-					<br>
-					<ul>
-					{{ form2.as_p }}
-					</ul>
-					<input type='submit' name='form_Negative' value='Submit_Negative' />
-
+					<form method='post' id="form_Negative">
+					<div id="ajaxwrapper">
+				    	{% csrf_token %}
+						<br>
+						<br>
+						<ul>
+						{{ Negative_Form.as_p }}
+						</ul>
+						<p id="sendwrapper"><input type='submit' name='form_Negative' value='Submit_Negative' /></p>
+					</div>
 				</form>
 			</div>
 
