@@ -11,7 +11,7 @@ urlpatterns = patterns('',
 	url(r'^TeacherSelector$','debates.views.teacherselector'),
 	url(r'^TeamCreate$','debates.views.teamcreate'),
 	url(r'^DebateSelector$','debates.views.debateselector'),
-	url(r'^post/scoring_upload.html$', 'debates.views.handle', name='judging'), 
+	url(r'^post/scoring_upload$', 'debates.views.handle', name='judging'), 
     # Examples:
     # url(r'^$', 'freshmendebates.views.home', name='home'),
     # url(r'^freshmendebates/', include('freshmendebates.foo.urls')),

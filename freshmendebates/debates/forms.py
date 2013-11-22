@@ -22,7 +22,6 @@ class AffirmativeScore(ModelForm):
 		Argument = scores.choices
 		class Meta:
 			model = Affirmative
-
 class NegativeScore(ModelForm):
 		SlideShowScore = scores.choices
 		Speaker1 = scores.choices

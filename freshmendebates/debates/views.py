@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from debates.models import Topic,Location,Date,Teacher
+from debates.models import Topic,Location,Date,Teacher,Affirmative,Negative,SubmittedAffirmativeScores,SubmittedNegativeScores
 from debates.forms import AffirmativeScore,NegativeScore
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
@@ -35,6 +35,8 @@ def judge(request):
 				SlideShowScore = Affform.cleaned_data.get('SlideShowScore')
 				Argument = Affform.cleaned_data.get('Argument')
 				logger.debug('Affirmative form is valid!')
+				positive_scores = Affform.save(commit=True)
+				logger.debug('Affirmative form has been saved')
 		elif 'form_Negative' in request.POST:
 			logger.debug('Form is Negative')
 			Negform = NegativeScore(request.POST)
@@ -45,18 +47,21 @@ def judge(request):
 				CrossExamination = Negform.cleaned_data.get('CrossExamination')
 				SlideShowScore = Negform.cleaned_data.get('SlideShowScore')
 				Argument = Negform.cleaned_data.get('Argument')
+				logger.debug('Negative form is valid!')
+				p = SubmittedNegativeScores(Speaker1 = Speaker1, Speaker2 = Speaker2, CrossExamination = CrossExamination, SlideShowScore = SlideShowScore, Argument = Argument, TeamNumber = "HEY")
+				logger.debug(p.id)
+				p.save()
+				logger.debug('Is there an ID?')
+				logger.debug(p.id)
+				logger.debug('Negative form has been saved')
 				#msg = "The operation has been received correctly."
 				#print request.POST
 				#return render_to_response('debates/scoring_upload.html', {'msg':msg}, context_instance=RequestContext(request))
-				logger.debug('Negative form is valid!')
 				#return render_to_response(msg)
 		if request.is_ajax():
 			logger.debug('Request is ajax')
-			return render(request, 'debates/scoring_upload.html')
 			msg = "The operation has been received correctly."
-			print request.POST
-#Now return the rendered template
-			return render_to_response('debates/scoring_upload.html', {'msg':msg}, context_instance=RequestContext(request))
+			logger.debug(msg)
 
 	return render(request,'debates/judge.html', {
 		'Affirmative_Form':Affform, 'Negative_Form':Negform,
@@ -64,7 +69,11 @@ def judge(request):
 
 def handle(request):
 
+	Affirmative_Scores = Affirmative.objects.all()
+	Negative_Scores = Negative.objects.all()
+
 	return render(request,'debates/scoring_upload.html', {
+		'Affirmative_Scores':Affirmative_Scores, 'Negative_Scores':Negative_Scores,
 	})
 
 def splash(request):

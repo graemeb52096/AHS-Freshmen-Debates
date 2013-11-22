@@ -1,7 +1,9 @@
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.forms.extras.widgets import SelectDateWidget
+import logging
 
+logger = logging.getLogger('logview.debugger')
 DEBATE_DAY_CHOICES = ('1st', '2nd')
 PERIOD_CHOICES = ('1', '2', '3', '4', '5', '6', '7')
 LOCATION_CHOICES = ('Library', 'Little_Theatre', 'Other_Location')
@@ -22,6 +24,8 @@ class Affirmative(models.Model):
 	CrossExamination = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
 	Argument = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
 	SlideShowScore = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
+	def save(*args, **kwargs):
+		logger.debug('Saving affirmative model')
 
 class Negative(models.Model):
 	Speaker1 = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
@@ -29,6 +33,28 @@ class Negative(models.Model):
 	CrossExamination = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
 	Argument = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
 	SlideShowScore = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
+	def save(*args, **kwargs):
+		logger.debug('Saving negative model')
+
+class SubmittedAffirmativeScores(models.Model):
+	Speaker1 = models.CharField(max_length=2)
+	Speaker2 = models.CharField(max_length=2)
+	CrossExamination = models.CharField(max_length=2)
+	Argument = models.CharField(max_length=2)
+	SlideShowScore = models.CharField(max_length=2)
+	TeamNumber = models.CharField(max_length=10)
+	def save(*args, **kwargs):
+		logger.debug('Been saved')
+
+class SubmittedNegativeScores(models.Model):
+	Speaker1 = models.CharField(max_length=2)
+	Speaker2 = models.CharField(max_length=2)
+	CrossExamination = models.CharField(max_length=2)
+	Argument = models.CharField(max_length=2)
+	SlideShowScore = models.CharField(max_length=2)
+	TeamNumber = models.CharField(max_length=10)
+	def save(*args, **kwargs):
+		logger.debug('Been saved')
 
 # class Team():
 
