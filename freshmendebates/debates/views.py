@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404
-from debates.models import Topic,Location,Date,Teacher,Affirmative,Negative,SubmittedAffirmativeScores,SubmittedNegativeScores
+from debates.models import Topic,Location,Date,Teacher,Affirmative,Negative,SubmittedAffirmativeScore,SubmittedNegativeScore
 from debates.forms import AffirmativeScore,NegativeScore
 from django.shortcuts import render_to_response
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponseServerError
 import logging
 
 
@@ -48,10 +48,11 @@ def judge(request):
 				SlideShowScore = Negform.cleaned_data.get('SlideShowScore')
 				Argument = Negform.cleaned_data.get('Argument')
 				logger.debug('Negative form is valid!')
-				p = SubmittedNegativeScores(Speaker1 = Speaker1, Speaker2 = Speaker2, CrossExamination = CrossExamination, SlideShowScore = SlideShowScore, Argument = Argument, TeamNumber = "HEY")
+				p = SubmittedNegativeScore(Speaker1 = Speaker1, Speaker2 = Speaker2, CrossExamination = CrossExamination, SlideShowScore = SlideShowScore, Argument = Argument, TeamNumber = "HEY")
+				logger.debug('Is there an ID? name or none')
 				logger.debug(p.id)
 				p.save()
-				logger.debug('Is there an ID?')
+				logger.debug('Is there an ID? name or none')
 				logger.debug(p.id)
 				logger.debug('Negative form has been saved')
 				#msg = "The operation has been received correctly."

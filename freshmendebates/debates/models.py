@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib import admin
 from django.core.urlresolvers import reverse
 from django.forms.extras.widgets import SelectDateWidget
 import logging
@@ -36,7 +37,7 @@ class Negative(models.Model):
 	def save(*args, **kwargs):
 		logger.debug('Saving negative model')
 
-class SubmittedAffirmativeScores(models.Model):
+class SubmittedAffirmativeScore(models.Model):
 	Speaker1 = models.CharField(max_length=2)
 	Speaker2 = models.CharField(max_length=2)
 	CrossExamination = models.CharField(max_length=2)
@@ -46,7 +47,7 @@ class SubmittedAffirmativeScores(models.Model):
 	def save(*args, **kwargs):
 		logger.debug('Been saved')
 
-class SubmittedNegativeScores(models.Model):
+class SubmittedNegativeScore(models.Model):
 	Speaker1 = models.CharField(max_length=2)
 	Speaker2 = models.CharField(max_length=2)
 	CrossExamination = models.CharField(max_length=2)
