@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from django_openid_auth import views
 # Comment the next two lines to disable the admin:
 from django.contrib import admin
 admin.autodiscover()
@@ -12,6 +13,14 @@ urlpatterns = patterns('',
 	url(r'^TeamCreate$','debates.views.teamcreate'),
 	url(r'^DebateSelector$','debates.views.debateselector'),
 	url(r'^post/scoring_upload$', 'debates.views.handle', name='judging'), 
+	#Google login Urls
+
+	url(r'', include('social_auth.urls')),
+	# url(r'^google/login/$', 'django_social_auth.views.login_begin', name='Social-login'),
+	# url(r'^google/login-complete/$', 'django_social_auth.views.login_complete', name='Social-complete'),
+	# url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/',}, name='logout'),
+
+	#End Google Urls
     # Examples:
     # url(r'^$', 'freshmendebates.views.home', name='home'),
     # url(r'^freshmendebates/', include('freshmendebates.foo.urls')),

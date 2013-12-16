@@ -3,8 +3,11 @@ from debates.models import Topic,Location,Date,Teacher,Affirmative,Negative,Subm
 from debates.forms import AffirmativeScore,NegativeScore
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect, HttpResponse, HttpResponseServerError
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.models import User
 import logging
 
+logger = logging.getLogger('logview.debugger')
 
 
 # Create your views here.
@@ -12,8 +15,6 @@ import logging
 
 #get the debate that are on
 def judge(request):
-	logger = logging.getLogger('logview.debugger')
-	
 	Submit_form = 'null'
 	Affform = AffirmativeScore()
 	Negform = NegativeScore()
@@ -29,31 +30,47 @@ def judge(request):
 			Affform = AffirmativeScore(request.POST)
 			Submit_form = 'aff'
 	 		if Affform.is_valid():
-				Speaker1 = Affform.cleaned_data.get('Speaker1')
-				Speaker2 = Affform.cleaned_data.get('Speaker2')
-				CrossExamination = Affform.cleaned_data.get('CrossExamination')
-				SlideShowScore = Affform.cleaned_data.get('SlideShowScore')
-				Argument = Affform.cleaned_data.get('Argument')
-				logger.debug('Affirmative form is valid!')
-				positive_scores = Affform.save(commit=True)
-				logger.debug('Affirmative form has been saved')
+	 			#temp storage of Data from form
+				S1 = Affform.cleaned_data.get('Speaker1')
+				S2 = Affform.cleaned_data.get('Speaker2')
+				CE = Affform.cleaned_data.get('CrossExamination')
+				SSS = Affform.cleaned_data.get('SlideShowScore')
+				Arg = Affform.cleaned_data.get('Argument')
+				#RB = Affform.cleaned_data.get('Rebuttal')
+				#creating an instance of submitted scores to save to data base.
+				p = SubmittedAffirmativeScore()
+				p.Speaker1 = S1
+				p.Speaker2 = S2
+				p.CrossExamination = CE
+				p.SlideShowScore = SSS
+				p.Argument = Arg
+				#p.R = RB
+				p.TeamNumber = 'Test, still need to get team numbers'
+				p.save()
+				logger.debug('Negative form has been saved')
 		elif 'form_Negative' in request.POST:
 			logger.debug('Form is Negative')
 			Negform = NegativeScore(request.POST)
 			Submit_form = 'neg'
 			if Negform.is_valid():
-				Speaker1 = Negform.cleaned_data.get('Speaker1')
-				Speaker2 = Negform.cleaned_data.get('Speaker2')
-				CrossExamination = Negform.cleaned_data.get('CrossExamination')
-				SlideShowScore = Negform.cleaned_data.get('SlideShowScore')
-				Argument = Negform.cleaned_data.get('Argument')
+				#temp storage of Data from form
+				S1 = Negform.cleaned_data.get('Speaker1')
+				S2 = Negform.cleaned_data.get('Speaker2')
+				CE = Negform.cleaned_data.get('CrossExamination')
+				SSS = Negform.cleaned_data.get('SlideShowScore')
+				Arg = Negform.cleaned_data.get('Argument')
+				#RB = Negform.cleaned_data.get('Rebuttal')
 				logger.debug('Negative form is valid!')
-				p = SubmittedNegativeScore(Speaker1 = Speaker1, Speaker2 = Speaker2, CrossExamination = CrossExamination, SlideShowScore = SlideShowScore, Argument = Argument, TeamNumber = "HEY")
-				logger.debug('Is there an ID? name or none')
-				logger.debug(p.id)
+				#creating an instance of submitted scores to save to data base.
+				p = SubmittedNegativeScore()
+				p.Speaker1 = S1
+				p.Speaker2 = S2
+				p.CrossExamination = CE
+				p.SlideShowScore = SSS
+				p.Argument = Arg
+				#p.R = RB
+				p.TeamNumber = 'Test, still need to get team numbers'
 				p.save()
-				logger.debug('Is there an ID? name or none')
-				logger.debug(p.id)
 				logger.debug('Negative form has been saved')
 				#msg = "The operation has been received correctly."
 				#print request.POST
@@ -83,8 +100,12 @@ def splash(request):
 	})
 
 def teacher(request):
+ 	
+ 	Index = SubmittedAffirmativeScore.objects.filter(TeamNumber = 'Test, still need to get team numbers')
+ 	Team = get_object_or_404(SubmittedAffirmativeScore)
 
 	return render(request,'debates/Teacher.html', {
+		'Team': Team
 	})
 
 def teacherselector(request):

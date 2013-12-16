@@ -99,6 +99,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'social_auth.middleware.SocialAuthExceptionMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -123,14 +124,78 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.formtools',
-    # Uncomment the next line to enable the admin:
+    # Admin
     'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
+    # End of Admin
     'debates',
+    'django_openid_auth',
+    'social_auth',
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
+
+
+#Google LogIn
+
+GAPPS_DOMAIN = 'mydomain.com'
+GAPPS_USERNAME = ''
+GAPPS_PASSWORD = ''
+# Check for new groups, or only on initial user creation
+GAPPS_ALWAY_ADD_GROUPS = False
+AUTHENTICATION_BACKENDS = (
+    #'social_auth.backends.google.GoogleBackend'
+    #'social_auth.backends.google.GoogleOAuthBackend',
+    'social_auth.backends.google.GoogleOAuth2Backend',
+    'django.contrib.auth.backends.ModelBackend',
+    )
+
+LOGIN_REDIRECT_URL = '/SplashPage'
+LOGIN_ERROR_URL = '/login-error/'
+LOGIN_URL = '/login/'
+SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/account/info/edit/?nu=1'
+SOCIAL_AUTH_COMPLETE_URL_NAME  = 'socialauth_complete'
+SOCIAL_AUTH_ASSOCIATE_URL_NAME = 'socialauth_associate_complete'
+SOCIAL_AUTH_UID_LENGTH = 222
+SOCIAL_AUTH_NONCE_SERVER_URL_LENGTH = 200
+SOCIAL_AUTH_ASSOCIATION_SERVER_URL_LENGTH = 135
+SOCIAL_AUTH_ASSOCIATION_HANDLE_LENGTH = 125
+LOGOUT_URL = '/logout/'
+OPENID_SSO_SERVER_URL = 'https://www.google.com/accounts/o8/id'
+
+
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'social_auth.context_processors.social_auth_by_type_backends',
+    'django.core.context_processors.static',
+)
+
+SOCIAL_AUTH_DEFAULT_USERNAME = 'New_User'
+SOCIAL_AUTH_UID_LENGTH = 16
+SOCIAL_AUTH_ASSOCIATION_HANDLE_LENGTH = 16
+SOCIAL_AUTH_NONCE_SERVER_URL_LENGTH = 16
+SOCIAL_AUTH_ASSOCIATION_SERVER_URL_LENGTH = 16
+SOCIAL_AUTH_ASSOCIATION_HANDLE_LENGTH = 16
+SOCIAL_AUTH_ENABLED_BACKENDS = ('google', 'github')
+#SOCIAL_AUTH_USER_MODEL = 'debates.models.user'
+
+SOCIAL_AUTH_PIPELINE = (
+    'social_auth.backends.pipeline.social.social_auth_user',
+    'social_auth.backends.pipeline.associate.associate_by_email',
+    'social_auth.backends.pipeline.misc.save_status_to_session',
+    'social_auth.backends.pipeline.social.associate_user',
+    'social_auth.backends.pipeline.social.load_extra_data',
+    'social_auth.backends.pipeline.user.update_user_details',
+)
+
+#project id = thinking-volt-426
+
+GOOGLE_OAUTH2_CLIENT_ID = '1019514932196-nme23t11a8rvvrpmedmn5iii41119c0l.apps.googleusercontent.com'
+GOOGLE_OAUTH2_CLIENT_SECRET = '2GT8H077O3u5-OHGS41x4uGS'
+
+#End Google LogIn
+
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
