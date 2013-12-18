@@ -29,7 +29,7 @@ ALLOWED_HOSTS = []
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
 # In a Windows environment this must be set to your system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'America/Vancouver'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -129,7 +129,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     # End of Admin
     'debates',
-    'django_openid_auth',
+    #'django_openid_auth',
     'social_auth',
 )
 
@@ -146,6 +146,7 @@ GAPPS_ALWAY_ADD_GROUPS = False
 AUTHENTICATION_BACKENDS = (
     #'social_auth.backends.google.GoogleBackend'
     #'social_auth.backends.google.GoogleOAuthBackend',
+    #'social_auth.backends.CustomGoogleBackend.CustomGoogleBackend',
     'social_auth.backends.google.GoogleOAuth2Backend',
     'django.contrib.auth.backends.ModelBackend',
     )
