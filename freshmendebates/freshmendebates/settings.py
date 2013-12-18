@@ -2,6 +2,7 @@
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+PROJECT_DIR = "/AHS-Freshmen-Debates/freshmendebates/"
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -69,7 +70,7 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    "/AHS-Freshmen-Debates/freshmendebates/freshmendebates/static/",
+    PROJECT_DIR + 'freshmendebates/static/',
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -133,14 +134,15 @@ INSTALLED_APPS = (
     'social_auth',
 )
 
-SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
+#SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 
 
 #Google LogIn
 
-GAPPS_DOMAIN = 'mydomain.com'
-GAPPS_USERNAME = ''
-GAPPS_PASSWORD = ''
+# GAPPS_DOMAIN = 'mydomain.com'
+# GAPPS_USERNAME = ''
+# GAPPS_PASSWORD = ''
+
 # Check for new groups, or only on initial user creation
 GAPPS_ALWAY_ADD_GROUPS = False
 AUTHENTICATION_BACKENDS = (
@@ -149,6 +151,7 @@ AUTHENTICATION_BACKENDS = (
     #'social_auth.backends.CustomGoogleBackend.CustomGoogleBackend',
     'social_auth.backends.google.GoogleOAuth2Backend',
     'django.contrib.auth.backends.ModelBackend',
+    #'auth',
     )
 
 LOGIN_REDIRECT_URL = '/SplashPage'
@@ -169,6 +172,7 @@ OPENID_SSO_SERVER_URL = 'https://www.google.com/accounts/o8/id'
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
     'social_auth.context_processors.social_auth_by_type_backends',
+    'social_auth.context_processors.social_auth_backends',
     'django.core.context_processors.static',
 )
 
@@ -184,10 +188,12 @@ SOCIAL_AUTH_ENABLED_BACKENDS = ('google', 'github')
 SOCIAL_AUTH_PIPELINE = (
     'social_auth.backends.pipeline.social.social_auth_user',
     'social_auth.backends.pipeline.associate.associate_by_email',
-    'social_auth.backends.pipeline.misc.save_status_to_session',
+    'social_auth.backends.pipeline.user.get_username',
+    'social_auth.backends.pipeline.user.create_user',
     'social_auth.backends.pipeline.social.associate_user',
     'social_auth.backends.pipeline.social.load_extra_data',
     'social_auth.backends.pipeline.user.update_user_details',
+
 )
 
 #project id = thinking-volt-426
@@ -220,27 +226,27 @@ LOGGING = {
         'dev_debug':{
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': '/AHS-Freshmen-Debates/freshmendebates/Logs/debug.log'
+            'filename': PROJECT_DIR + 'Logs/debug.log'
         },
         'dev_info':{
             'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename': '/AHS-Freshmen-Debates/freshmendebates/Logs/info.log'
+            'filename': PROJECT_DIR + 'Logs/info.log'
         },
         'dev_warning':{
             'level': 'WARNING',
             'class': 'logging.FileHandler',
-            'filename': '/AHS-Freshmen-Debates/freshmendebates/Logs/warning.log'
+            'filename': PROJECT_DIR + 'Logs/warning.log'
         },
         'dev_error':{
             'level': 'ERROR',
             'class': 'logging.FileHandler',
-            'filename': '/AHS-Freshmen-Debates/freshmendebates/Logs/error.log'
+            'filename': PROJECT_DIR + 'Logs/error.log'
         },
         'dev_critical':{
             'level': 'CRITICAL',
             'class': 'logging.FileHandler',
-            'filename': '/AHS-Freshmen-Debates/freshmendebates/Logs/critical.log'
+            'filename': PROJECT_DIR + 'Logs/critical.log'
         }
 
     },
