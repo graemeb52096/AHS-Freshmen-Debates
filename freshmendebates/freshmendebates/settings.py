@@ -1,8 +1,8 @@
 # Django settings for freshmendebates project.
-
+import os
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-PROJECT_DIR = "/AHS-Freshmen-Debates/freshmendebates/"
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -56,7 +56,7 @@ MEDIA_ROOT = ''
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://example.com/media/", "http://media.example.com/"
-MEDIA_URL = ''
+MEDIA_URL = '/media/'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
@@ -70,7 +70,7 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    PROJECT_DIR + 'freshmendebates/static/',
+    PROJECT_ROOT + "/freshmendebates/freshmendebates/static/",
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -111,7 +111,7 @@ ROOT_URLCONF = 'freshmendebates.urls'
 WSGI_APPLICATION = 'freshmendebates.wsgi.application'
 
 TEMPLATE_DIRS = (
-    "/AHS-Freshmen-Debates/freshmendebates/freshmendebates/templates/"
+    PROJECT_ROOT + "/freshmendebates/freshmendebates/templates/"
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -134,7 +134,7 @@ INSTALLED_APPS = (
     'social_auth',
 )
 
-#SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
+# SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 
 
 #Google LogIn
@@ -146,13 +146,12 @@ INSTALLED_APPS = (
 # Check for new groups, or only on initial user creation
 GAPPS_ALWAY_ADD_GROUPS = False
 AUTHENTICATION_BACKENDS = (
-    #'social_auth.backends.google.GoogleBackend'
     #'social_auth.backends.google.GoogleOAuthBackend',
     #'social_auth.backends.CustomGoogleBackend.CustomGoogleBackend',
     'social_auth.backends.google.GoogleOAuth2Backend',
+    # 'social_auth.backends.google.GoogleBackend'
     'django.contrib.auth.backends.ModelBackend',
-    #'auth',
-    )
+)
 
 LOGIN_REDIRECT_URL = '/SplashPage'
 LOGIN_ERROR_URL = '/login-error/'
@@ -169,20 +168,20 @@ OPENID_SSO_SERVER_URL = 'https://www.google.com/accounts/o8/id'
 
 
 
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.contrib.auth.context_processors.auth',
-    'social_auth.context_processors.social_auth_by_type_backends',
-    'social_auth.context_processors.social_auth_backends',
-    'django.core.context_processors.static',
-)
+# TEMPLATE_CONTEXT_PROCESSORS = (
+#     'django.contrib.auth.context_processors.auth',
+#     'social_auth.context_processors.social_auth_by_type_backends',
+#     'social_auth.context_processors.social_auth_backends',
+#     'django.core.context_processors.static',
+# )
 
 SOCIAL_AUTH_DEFAULT_USERNAME = 'New_User'
-SOCIAL_AUTH_UID_LENGTH = 16
-SOCIAL_AUTH_ASSOCIATION_HANDLE_LENGTH = 16
-SOCIAL_AUTH_NONCE_SERVER_URL_LENGTH = 16
-SOCIAL_AUTH_ASSOCIATION_SERVER_URL_LENGTH = 16
-SOCIAL_AUTH_ASSOCIATION_HANDLE_LENGTH = 16
-SOCIAL_AUTH_ENABLED_BACKENDS = ('google', 'github')
+SOCIAL_AUTH_UID_LENGTH = 222
+SOCIAL_AUTH_NONCE_SERVER_URL_LENGTH = 200
+SOCIAL_AUTH_ASSOCIATION_SERVER_URL_LENGTH = 135
+SOCIAL_AUTH_ASSOCIATION_HANDLE_LENGTH = 125
+SOCIAL_AUTH_ENABLED_BACKENDS = ('google')
+SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
 #SOCIAL_AUTH_USER_MODEL = 'debates.models.user'
 
 SOCIAL_AUTH_PIPELINE = (
@@ -192,8 +191,7 @@ SOCIAL_AUTH_PIPELINE = (
     'social_auth.backends.pipeline.user.create_user',
     'social_auth.backends.pipeline.social.associate_user',
     'social_auth.backends.pipeline.social.load_extra_data',
-    'social_auth.backends.pipeline.user.update_user_details',
-
+    'social_auth.backends.pipeline.user.update_user_details'
 )
 
 #project id = thinking-volt-426
@@ -226,27 +224,27 @@ LOGGING = {
         'dev_debug':{
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': PROJECT_DIR + 'Logs/debug.log'
+            'filename': PROJECT_ROOT + '/freshmendebates/Logs/debug.log'
         },
         'dev_info':{
             'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename': PROJECT_DIR + 'Logs/info.log'
+            'filename': PROJECT_ROOT + '/freshmendebates/Logs/info.log'
         },
         'dev_warning':{
             'level': 'WARNING',
             'class': 'logging.FileHandler',
-            'filename': PROJECT_DIR + 'Logs/warning.log'
+            'filename': PROJECT_ROOT + '/freshmendebates/Logs/warning.log'
         },
         'dev_error':{
             'level': 'ERROR',
             'class': 'logging.FileHandler',
-            'filename': PROJECT_DIR + 'Logs/error.log'
+            'filename': PROJECT_ROOT + '/freshmendebates/Logs/error.log'
         },
         'dev_critical':{
             'level': 'CRITICAL',
             'class': 'logging.FileHandler',
-            'filename': PROJECT_DIR + 'Logs/critical.log'
+            'filename': PROJECT_ROOT + '/freshmendebates/Logs/critical.log'
         }
 
     },
