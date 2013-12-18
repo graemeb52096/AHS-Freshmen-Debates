@@ -139,9 +139,10 @@ INSTALLED_APPS = (
 
 #Google LogIn
 
-GAPPS_DOMAIN = 'mydomain.com'
-GAPPS_USERNAME = ''
-GAPPS_PASSWORD = ''
+# GAPPS_DOMAIN = 'mydomain.com'
+# GAPPS_USERNAME = ''
+# GAPPS_PASSWORD = ''
+
 # Check for new groups, or only on initial user creation
 GAPPS_ALWAY_ADD_GROUPS = False
 AUTHENTICATION_BACKENDS = (
@@ -167,6 +168,12 @@ OPENID_SSO_SERVER_URL = 'https://www.google.com/accounts/o8/id'
 
 
 
+# TEMPLATE_CONTEXT_PROCESSORS = (
+#     'django.contrib.auth.context_processors.auth',
+#     'social_auth.context_processors.social_auth_by_type_backends',
+#     'social_auth.context_processors.social_auth_backends',
+#     'django.core.context_processors.static',
+# )
 
 SOCIAL_AUTH_DEFAULT_USERNAME = 'New_User'
 SOCIAL_AUTH_UID_LENGTH = 222
