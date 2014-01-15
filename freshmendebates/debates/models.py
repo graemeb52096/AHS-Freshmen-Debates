@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 from django.contrib import admin
 from django.core.urlresolvers import reverse
 from django.forms.extras.widgets import SelectDateWidget
@@ -21,14 +22,22 @@ SCORE_CHOICES = (
         ('9', '9'),
         ('10', '10'),
     )
+ROLE_CHOICES = (
+        ('0', 'School'),
+        ('1', 'Teacher'),
+        ('2', 'Judge'),
+        ('3', 'Student'),
+        ('4', 'Admin'),
+    )
 
-# Create your models here.
+# Create models here.
 class Affirmative(models.Model):	
 	Speaker1 = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
 	Speaker2 = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
 	CrossExamination = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
 	Argument = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
 	SlideShowScore = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
+	Rebuttal = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
 	#R = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
 
 class Negative(models.Model):
@@ -37,7 +46,59 @@ class Negative(models.Model):
 	CrossExamination = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
 	Argument = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
 	SlideShowScore = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
+	Rebuttal = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
 	#R = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
+
+class GoogleUser(models.Model):
+	first_name = models.CharField(max_length=255)
+	last_name = models.CharField(max_length=255)
+	role = models.CharField(max_length=2, choices=ROLE_CHOICES)
+	email = models.CharField(max_length=30)
+	password = models.CharField(max_length=255)
+	is_admin = models.BooleanField(('admin status'),default=False)
+	is_staff = models.BooleanField(('staff status'),default=True)
+	is_superuser = models.BooleanField(('super status'),default=False)
+	date_joined = models.DateTimeField(('date joined'), default=timezone.now)
+	def create_user(self, first_name, last_name, email, password):
+		user = User.objects.create_user(first_name, email, password)
+		user.last_name = last_name
+		return user
+		logger.debug('New user has been saved')	
+	def __unicode__(self):
+				return u'%s' % self.last_name
+
+
+class Student(models.Model):
+	first_name = models.CharField(max_length=255)
+	last_name = models.CharField(max_length=255)
+	englishTeacher = models.ForeignKey(GoogleUser, related_name='EnglishTeacher')
+	englishPeriod = models.CharField(max_length=255)
+	IHSTeacher = models.ForeignKey(GoogleUser, related_name='IHSTeacher')
+	IHSPeriod = models.CharField(max_length=255)
+	def __unicode__(self):
+				return u'%s' % self.last_name + ',' + self.first_name
+	# class Meta:
+ #    		app_label="classes"
+
+class Team(models.Model):
+ 	#Start of roles -- getting students names tied into roles.
+	speaker1 = models.ForeignKey(Student, related_name='student_speaker1_type')
+	speaker2 = models.ForeignKey(Student, related_name='student_speaker2_type')
+	crossexamination = models.ForeignKey(Student, related_name='student_cross_type')
+	slideshow = models.ForeignKey(Student, related_name='student_slide_type')
+	rebuttal = models.ForeignKey(Student, related_name='student_rebutt_type')
+ 	#End of roles
+	teamnumber = models.CharField(max_length=20)
+ 	#Not sure about this syntax --  may want to ask terrence
+	topic = models.CharField(max_length=255)
+	school = models.CharField(max_length=255)
+	#Is pro? True/False	
+	affirmative = models.BooleanField((Affirmative), default = False)
+ 	#end of unknown syntax
+ 	teacher = models.ForeignKey(GoogleUser)
+ 	def __unicode__(self):
+				return u'%s' % self.teamnumber
+
 
 class SubmittedAffirmativeScore(models.Model):
 	Speaker1 = models.CharField(max_length=3)
@@ -45,8 +106,9 @@ class SubmittedAffirmativeScore(models.Model):
 	CrossExamination = models.CharField(max_length=3)
 	Argument = models.CharField(max_length=3)
 	SlideShowScore = models.CharField(max_length=3)
-	#R = models.CharField(max_length=3)
-	TeamNumber = models.CharField(max_length=20)
+	Rebuttal = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
+
+	TeamNumber = models.ForeignKey(Team)
 	def __unicode__(self):
 				return u'%s' % self.TeamNumber
 
@@ -56,15 +118,14 @@ class SubmittedNegativeScore(models.Model):
 	CrossExamination = models.CharField(max_length=3)
 	Argument = models.CharField(max_length=3)
 	SlideShowScore = models.CharField(max_length=3)
-	#R = models.CharField(max_length=3)
-	TeamNumber = models.CharField(max_length=20)
+	Rebuttal = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
+
+	TeamNumber = models.ForeignKey(Team)
 	def __unicode__(self):
 				return u'%s' % self.TeamNumber
-
-# class Team():
-
 class Topic(models.Model):
-	topic = models.CharField(max_length=255)
+	topic = models.CharField(max_length=25)
+	description = models.CharField(max_length=255)
 	def __unicode__(self):
 				return u'%s' % self.topic
 
@@ -80,10 +141,31 @@ class Date(models.Model):
 	def __unicode__(self):
 				return u'%s' % self.date
 
-class Teacher(models.Model):
-	teahcer = models.CharField(max_length=255)
+
+
+class School(models.Model):#Also admin
+	name = models.CharField(max_length=25)
+	district = models.CharField(max_length=25)
+	description = models.CharField(max_length=255)
+	is_staff = models.BooleanField(('staff status'),default=True)
 	def __unicode__(self):
-				return u'%s' % self.teahcer
+			return u'%s' % self.name
+
+class Debate(models.Model):
+ 	#Affirmative team
+ 	affirmative = models.ForeignKey(Team, related_name='team_affirmative_type')
+ 	#Negative team
+ 	negative = models.ForeignKey(Team, related_name='team_negative_type')
+ 	#date of debate
+ 	date = models.ForeignKey(Date)
+ 	#Location of debate
+ 	location =models.ForeignKey(Location)
+ 	#school
+ 	school = models.ForeignKey(School)
+ 	#topic
+ 	topic = models.ForeignKey(Topic)
+
+
 
 class SCORE_OPTIONS(models.Model):
 	SCORE_CHOICES = [(5,'5'),(6,'6'),(7,'7'),(8,'8'),(9,'9'),(10,'10')]

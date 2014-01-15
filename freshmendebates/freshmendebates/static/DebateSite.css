@@ -200,3 +200,17 @@ input[type=radio]:checked + label {
 {
 	margin: -1%;
 }
+
+#RegistrationForm
+{
+	padding: 2%;
+	background-color: #F2EEEA;
+	text-align: left;
+	border: 10px solid #B4B2AE;
+	display: inline-block;
+	margin: 2.5%;
+	border-radius:;
+	height: auto;
+	width: auto;
+
+}

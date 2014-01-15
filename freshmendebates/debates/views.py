@@ -1,10 +1,13 @@
 from django.shortcuts import render, get_object_or_404
-from debates.models import Topic,Location,Date,Teacher,Affirmative,Negative,SubmittedAffirmativeScore,SubmittedNegativeScore
-from debates.forms import AffirmativeScore,NegativeScore
+from debates.models import Topic,Location,Date,User,Affirmative,Negative,SubmittedAffirmativeScore,SubmittedNegativeScore,GoogleUser,Student
+from debates.forms import AffirmativeScore,NegativeScore,RegistrationForm,ImportExcelForm
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect, HttpResponse, HttpResponseServerError
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
+from django.forms.extras.widgets import SelectDateWidget
+import datetime
+from django.utils.timezone import utc
 import logging
 
 logger = logging.getLogger('logview.debugger')
@@ -84,6 +87,34 @@ def judge(request):
 	return render(request,'debates/judge.html', {
 		'Affirmative_Form':Affform, 'Negative_Form':Negform,
 	})
+def new_user(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            first_name = form.cleaned_data.get('first_name')
+            logger.debug(first_name)
+            last_name = form.cleaned_data.get('last_name')
+            logger.debug(last_name)
+            role = form.cleaned_data.get('role')
+            email = form.cleaned_data.get('email')
+            password = form.cleaned_data.get('password')
+            new_registered_user = GoogleUser()
+            new_registered_user.first_name = first_name
+            new_registered_user.last_name = last_name
+            new_registered_user.email = email
+            new_registered_user.role = role
+            new_registered_user.password = password
+            new_registered_user.is_admin = False
+            new_registered_user.is_staff = True
+            new_registered_user.is_superuser = False
+            new_registered_user.save()
+            new_registered_user.create_user(first_name,last_name,email,password)
+    else:
+        form = RegistrationForm()
+
+	return render(request,'debates/new_user.html',  {
+		'Form':form,
+	})
 
 def handle(request):
 
@@ -122,3 +153,241 @@ def debateselector(request):
 
 	return render(request,'debates/DebateSelector.html', {
 	})
+
+def test_flowcell(request):
+    if request.method == 'POST': # If the form has been submitted...
+        form = ImportExcelForm(request.POST,  request.FILES) # A form bound to the POST data
+        if form.is_valid(): # All validation rules pass
+            excel_parser= ExcelParser()
+            success, log  = excel_parser.read_excel(request.FILES['file'] )
+            if success:
+                return redirect(reverse('admin:index') + "pages/flowcell_good/") ## redirects to aliquot page ordered by the most recent
+            else:
+                errors = '* Problem with flowcell * <br><br>log details below:<br>' + "<br>".join(log)
+    else:
+        form = ImportExcelForm() # An unbound form
+    return render(request,'debates/file_upload.html',{
+    	'form':form,
+    	})
+
+def databasesetup(request):
+	new_student = Student()
+	new_student.last_name = 'Abbott'
+	new_student.first_name = 'Portia'
+	new_student.englishTeacher = 'Park'
+	new_student.englishPeriod = '7'
+	new_student.IHSTeacher = 'Hsiao-Frates'
+	new_student.IHSPeriod = '3'
+	new_student.save()
+
+	new_student = Student()
+	new_student.last_name = 'Aguayo'
+	new_student.first_name = 'Maria'
+	new_student.englishTeacher = 'Park'
+	new_student.englishPeriod = '7'
+	new_student.IHSTeacher = 'Hsiao-Frates'
+	new_student.IHSPeriod = '5'
+	new_student.save()
+
+	new_student = Student()
+	new_student.last_name = 'Aguilar'
+	new_student.first_name = 'Alejandra'
+	new_student.englishTeacher = 'Lent'
+	new_student.englishPeriod = '1'
+	new_student.IHSTeacher = 'Hudson'
+	new_student.IHSPeriod = '7'
+	new_student.save()
+
+	new_student = Student()
+	new_student.last_name = 'Aguilar'
+	new_student.first_name = 'Isabel'
+	new_student.englishTeacher = 'Wild'
+	new_student.englishPeriod = '6'
+	new_student.IHSTeacher = 'Hsiao-Frates'
+	new_student.IHSPeriod = '1'
+	new_student.save()
+
+	new_student = Student()
+	new_student.last_name = 'Allen'
+	new_student.first_name = 'Jordan'
+	new_student.englishTeacher = 'Park'
+	new_student.englishPeriod = '7'
+	new_student.IHSTeacher = 'Hsiao-Frates'
+	new_student.IHSPeriod = '1'
+	new_student.save()
+
+	new_student = Student()
+	new_student.last_name = 'Allon'
+	new_student.first_name = 'Ethan'
+	new_student.englishTeacher = 'Dolci'
+	new_student.englishPeriod = '2'
+	new_student.IHSTeacher = 'Surowitz'
+	new_student.IHSPeriod = '7'
+	new_student.save()
+
+	new_student = Student()
+	new_student.last_name = 'Amatya'
+	new_student.first_name = 'Emita'
+	new_student.englishTeacher = 'Lent'
+	new_student.englishPeriod = '1'
+	new_student.IHSTeacher = 'Hudson'
+	new_student.IHSPeriod = '7'
+	new_student.save()
+
+	new_student = Student()
+	new_student.last_name = 'Arya'
+	new_student.first_name = 'Sonam'
+	new_student.englishTeacher = ''
+	new_student.englishPeriod = ''
+	new_student.IHSTeacher = 'Hudson'
+	new_student.IHSPeriod = '5'
+	new_student.save()
+
+	new_student = Student()
+	new_student.last_name = 'Balderas'
+	new_student.first_name = 'Karla'
+	new_student.englishTeacher = ''
+	new_student.englishPeriod = ''
+	new_student.IHSTeacher = 'Surowitz'
+	new_student.IHSPeriod = '7'
+	new_student.save()
+
+	new_student = Student()
+	new_student.last_name = 'Baldwin'
+	new_student.first_name = 'Drew'
+	new_student.englishTeacher = 'Park'
+	new_student.englishPeriod = '3'
+	new_student.IHSTeacher = 'Hsiao-Frates'
+	new_student.IHSPeriod = '5'
+	new_student.save()
+
+	new_student = Student()
+	new_student.last_name = 'Ballman'
+	new_student.first_name = 'Alexis'
+	new_student.englishTeacher = 'Dolci'
+	new_student.englishPeriod = '2'
+	new_student.IHSTeacher = 'Surowitz'
+	new_student.IHSPeriod = '7'
+	new_student.save()
+
+	new_student = Student()
+	new_student.last_name = 'Banegas'
+	new_student.first_name = 'Jaime'
+	new_student.englishTeacher = 'Lent'
+	new_student.englishPeriod = '6'
+	new_student.IHSTeacher = 'Huynh'
+	new_student.IHSPeriod = '3'
+	new_student.save()
+
+	new_student = Student()
+	new_student.last_name = 'Barnes'
+	new_student.first_name = 'Jonathan'
+	new_student.englishTeacher = 'Lent'
+	new_student.englishPeriod = '1'
+	new_student.IHSTeacher = 'Hudson'
+	new_student.IHSPeriod = '2'
+	new_student.save()
+
+	new_student = Student()
+	new_student.last_name = 'Bates'
+	new_student.first_name = 'Lorin'
+	new_student.englishTeacher = ''
+	new_student.englishPeriod = ''
+	new_student.IHSTeacher = 'Surowitz'
+	new_student.IHSPeriod = '2'
+	new_student.save()
+
+	new_student = Student()
+	new_student.last_name = 'Benau'
+	new_student.first_name = 'Shira'
+	new_student.englishTeacher = 'Dolci'
+	new_student.englishPeriod = '2'
+	new_student.IHSTeacher = 'Surowitz'
+	new_student.IHSPeriod = '7'
+	new_student.save()
+
+	new_student = Student()
+	new_student.last_name = 'Bensman'
+	new_student.first_name = 'Olivia'
+	new_student.englishTeacher = 'Dolci'
+	new_student.englishPeriod = '5'
+	new_student.IHSTeacher = 'Surowitz'
+	new_student.IHSPeriod = '7'
+	new_student.save()
+
+	new_student = Student()
+	new_student.last_name = 'Bernal'
+	new_student.first_name = 'Timothy'
+	new_student.englishTeacher = 'Lent'
+	new_student.englishPeriod = '1'
+	new_student.IHSTeacher = 'Huynh'
+	new_student.IHSPeriod = '3'
+	new_student.save()
+
+	new_student = Student()
+	new_student.last_name = 'Bernardin'
+	new_student.first_name = 'Lila'
+	new_student.englishTeacher = 'Dolci'
+	new_student.englishPeriod = '7'
+	new_student.IHSTeacher = 'Surowitz'
+	new_student.IHSPeriod = '2'
+	new_student.save()
+
+	new_student = Student()
+	new_student.last_name = 'Bittner'
+	new_student.first_name = 'Crew'
+	new_student.englishTeacher = 'Dolci'
+	new_student.englishPeriod = '2'
+	new_student.IHSTeacher = 'Surowitz'
+	new_student.IHSPeriod = '6'
+	new_student.save()
+
+	new_student = Student()
+	new_student.last_name = 'Bonnel'
+	new_student.first_name = 'Jerri'
+	new_student.englishTeacher = 'Dolci'
+	new_student.englishPeriod = '5'
+	new_student.IHSTeacher = 'Surowitz'
+	new_student.IHSPeriod = '6'
+	new_student.save()
+
+	new_student = Student()
+	new_student.last_name = 'Brown'
+	new_student.first_name = 'Rebecca'
+	new_student.englishTeacher = 'Lent'
+	new_student.englishPeriod = '4'
+	new_student.IHSTeacher = 'Huynh'
+	new_student.IHSPeriod = '3'
+	new_student.save()
+
+	new_student = Student()
+	new_student.last_name = 'Brumels'
+	new_student.first_name = 'Aaron'
+	new_student.englishTeacher = 'Lent'
+	new_student.englishPeriod = '2'
+	new_student.IHSTeacher = 'Hudson'
+	new_student.IHSPeriod = '2'
+	new_student.save()
+
+	new_student = Student()
+	new_student.last_name = 'Brusseau'
+	new_student.first_name = 'Henry'
+	new_student.englishTeacher = 'Park'
+	new_student.englishPeriod = '7'
+	new_student.IHSTeacher = 'Hsiao-Frates'
+	new_student.IHSPeriod = '3'
+	new_student.save()
+
+	new_student = Student()
+	new_student.last_name = 'Brusseau'
+	new_student.first_name = 'Henry'
+	new_student.englishTeacher = 'Park'
+	new_student.englishPeriod = '7'
+	new_student.IHSTeacher = 'Hudson'
+	new_student.IHSPeriod = '5'
+	new_student.save()
+
+	return render(request,'debates/judge.html',{
+	})
+
+

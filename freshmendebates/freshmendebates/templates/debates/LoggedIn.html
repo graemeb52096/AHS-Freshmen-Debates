@@ -1,15 +1,14 @@
-
 <html>
 <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}DebateSite.css">
 <script type="text/javascript">
 </script>
 
 <head>
-	<title>Splash Page</title>
+	<title>Logged In</title>
 </head>
 <body>
 	<div class="Banner">
-		Albany High School Freshmen Debates <a href="{% url 'socialauth_begin' 'google-oauth2' %}">Login with Google</a>
+		Albany High School Freshmen Debates <a href="{% url 'debates.views.newuser' %}">Log Out</a>
 	</div>
 	<div id="MainBody">
 

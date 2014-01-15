@@ -130,8 +130,10 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     # End of Admin
     'debates',
+    #'debates.models.User',
     #'django_openid_auth',
     'social_auth',
+    'admin_import',
 )
 
 # SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
@@ -156,7 +158,7 @@ AUTHENTICATION_BACKENDS = (
 LOGIN_REDIRECT_URL = '/SplashPage'
 LOGIN_ERROR_URL = '/login-error/'
 LOGIN_URL = '/login/'
-SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/account/info/edit/?nu=1'
+SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/NewUserLogIn'
 SOCIAL_AUTH_COMPLETE_URL_NAME  = 'socialauth_complete'
 SOCIAL_AUTH_ASSOCIATE_URL_NAME = 'socialauth_associate_complete'
 SOCIAL_AUTH_UID_LENGTH = 222
@@ -182,7 +184,7 @@ SOCIAL_AUTH_ASSOCIATION_SERVER_URL_LENGTH = 135
 SOCIAL_AUTH_ASSOCIATION_HANDLE_LENGTH = 125
 SOCIAL_AUTH_ENABLED_BACKENDS = ('google')
 SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
-#SOCIAL_AUTH_USER_MODEL = 'debates.models.user'
+#AUTH_USER_MODEL = 'debates.models.User'
 
 SOCIAL_AUTH_PIPELINE = (
     'social_auth.backends.pipeline.social.social_auth_user',

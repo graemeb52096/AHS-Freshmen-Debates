@@ -1,5 +1,6 @@
 from django import forms
 from django.db import models
+from debates.models import GoogleUser
 from django.forms import ModelForm
 from debates.models import Affirmative,Negative
 
@@ -11,6 +12,13 @@ SCORE_CHOICES = (
 		('9','9'),
 		('10','10')
 		)
+ROLE_CHOICES = (
+        ('0', 'School'),
+        ('1', 'Teacher'),
+        ('2', 'Judge'),
+        ('3', 'Student'),
+        ('4', 'Admin'),
+    )
 scores = forms.ChoiceField(widget=forms.RadioSelect(), choices=SCORE_CHOICES)
 
 
@@ -20,6 +28,7 @@ class AffirmativeScore(ModelForm):
 		Speaker2 = scores.choices
 		CrossExamination = scores.choices
 		Argument = scores.choices
+		Rebuttal = scores.choices
 		class Meta:
 			model = Affirmative
 class NegativeScore(ModelForm):
@@ -28,8 +37,20 @@ class NegativeScore(ModelForm):
 		Speaker2 = scores.choices
 		CrossExamination = scores.choices
 		Argument = scores.choices
+		Rebuttal = scores.choices
 		class Meta:
 			model = Negative
+class RegistrationForm(ModelForm):
+		FirstName = models.CharField(max_length=255)
+		LastName = models.CharField(max_length=255)
+		role = models.CharField(max_length=2, choices=ROLE_CHOICES)
+		email = models.CharField(max_length=30)
+		password = models.CharField(max_length=255)
+		class Meta:
+			model = GoogleUser
+
+class ImportExcelForm(forms.Form):
+    	file  = forms.FileField(label= "Choose excel to upload")
 
 # class Team(ModelForm):
 # 		DebateTopic = 

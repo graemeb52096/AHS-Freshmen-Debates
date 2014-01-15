@@ -13,6 +13,9 @@ urlpatterns = patterns('',
 	url(r'^TeamCreate$','debates.views.teamcreate'),
 	url(r'^DebateSelector$','debates.views.debateselector'),
 	url(r'^post/scoring_upload$', 'debates.views.handle', name='judging'), 
+	url(r'^NewUserLogIn$', 'debates.views.new_user', name = 'newuser'),
+	url(r'^ExcelUpload$', 'debates.views.test_flowcell', name = 'ExcelUpload'),
+	url(r'^AddStudentsToDataBase2014$', 'debates.views.databasesetup', name = 'data'),
 	#Google login Urls
 
 	url(r'', include('social_auth.urls')),

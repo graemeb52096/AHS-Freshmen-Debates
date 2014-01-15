@@ -1,0 +1,39 @@
+Getting request method GET!
+Getting request method GET!
+Getting request method Post!
+<QueryDict: {u'Speaker1': [u'5'], u'Speaker2': [u'5'], u'SlideShowScore': [u'5'], u'Argument': [u'5'], u'CrossExamination': [u'5'], u'form_Positive': [u'form_Positive'], u'csrfmiddlewaretoken': [u'8wEcWUlE4snhGzARzfWELmHl5rCzLtcS'], u'Rebuttal': [u'5']}>
+Form is Positive
+Negative form has been saved
+Request is ajax
+The operation has been received correctly.
+Getting request method GET!
+Getting request method Post!
+<QueryDict: {u'Speaker1': [u'5'], u'Speaker2': [u'5'], u'SlideShowScore': [u'5'], u'Argument': [u'5'], u'CrossExamination': [u'5'], u'form_Positive': [u'form_Positive'], u'csrfmiddlewaretoken': [u'8wEcWUlE4snhGzARzfWELmHl5rCzLtcS'], u'Rebuttal': [u'5']}>
+Form is Positive
+Negative form has been saved
+Request is ajax
+The operation has been received correctly.
+Getting request method GET!
+Getting request method GET!
+Getting request method GET!
+Getting request method Post!
+<QueryDict: {u'Speaker1': [u'5'], u'Speaker2': [u'5'], u'SlideShowScore': [u'5'], u'Argument': [u'5'], u'CrossExamination': [u'5'], u'form_Positive': [u'form_Positive'], u'csrfmiddlewaretoken': [u'8wEcWUlE4snhGzARzfWELmHl5rCzLtcS'], u'Rebuttal': [u'5']}>
+Form is Positive
+Negative form has been saved
+Request is ajax
+The operation has been received correctly.
+Getting request method Post!
+<QueryDict: {u'Speaker1': [u'5'], u'Speaker2': [u'5'], u'SlideShowScore': [u'5'], u'Argument': [u'5'], u'form_Negative': [u'form_Negative'], u'CrossExamination': [u'5'], u'csrfmiddlewaretoken': [u'8wEcWUlE4snhGzARzfWELmHl5rCzLtcS'], u'Rebuttal': [u'5']}>
+Form is Negative
+Negative form is valid!
+Negative form has been saved
+Request is ajax
+The operation has been received correctly.
+None
+Graeme
+Graeme
+Graeme
+Graeme
+Bates
+Graeme
+Bates
