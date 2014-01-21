@@ -3,6 +3,7 @@ from django.db import models
 from debates.models import GoogleUser
 from django.forms import ModelForm
 from debates.models import Affirmative,Negative
+from django.forms import CheckboxSelectMultiple
 
 SCORE_CHOICES = (
 		('5','5'),

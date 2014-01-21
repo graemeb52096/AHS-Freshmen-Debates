@@ -8,6 +8,10 @@ from django.utils.timezone import utc
 import pytz
 from django.utils import timezone
 import logging
+from csvImporter.model import CsvDbModel
+from django.forms import CheckboxSelectMultiple
+from django.forms.models import ModelMultipleChoiceField
+from django import forms
 
 logger = logging.getLogger('logview.debugger')
 DEBATE_DAY_CHOICES = ('1st', '2nd')
@@ -31,6 +35,22 @@ ROLE_CHOICES = (
     )
 
 # Create models here.
+
+
+class School(models.Model):#Also admin
+	name = models.CharField(max_length=25)
+	district = models.CharField(max_length=25)
+	description = models.CharField(max_length=255)
+	is_staff = models.BooleanField(('staff status'),default=True)
+	def __unicode__(self):
+			return u'%s' % self.name
+
+			
+class Topic(models.Model):
+	topic = models.CharField(max_length=25)
+	description = models.CharField(max_length=255)
+	def __unicode__(self):
+				return u'%s' % self.topic
 class Affirmative(models.Model):	
 	Speaker1 = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
 	Speaker2 = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
@@ -76,24 +96,37 @@ class Student(models.Model):
 	IHSTeacher = models.ForeignKey(GoogleUser, related_name='IHSTeacher')
 	IHSPeriod = models.CharField(max_length=255)
 	def __unicode__(self):
-				return u'%s' % self.last_name + ',' + self.first_name
+				return u'%s' % self.last_name
 	# class Meta:
  #    		app_label="classes"
 
+# class MyCsvModel(CsvDbModel):
+
+# 	class Meta:
+# 		dbModel = Student
+# 		delimiter = ","
+
 class Team(models.Model):
+
+	Student_1 = models.ForeignKey(Student, related_name='student1_type')
+	Student_2 = models.ForeignKey(Student, related_name='student2_type')
+	Student_3 = models.ForeignKey(Student, related_name='student3_type')
+	Student_4 = models.ForeignKey(Student, related_name='student4_type')
+	Student_5 = models.ForeignKey(Student, related_name='student5_type')
  	#Start of roles -- getting students names tied into roles.
-	speaker1 = models.ForeignKey(Student, related_name='student_speaker1_type')
-	speaker2 = models.ForeignKey(Student, related_name='student_speaker2_type')
-	crossexamination = models.ForeignKey(Student, related_name='student_cross_type')
-	slideshow = models.ForeignKey(Student, related_name='student_slide_type')
-	rebuttal = models.ForeignKey(Student, related_name='student_rebutt_type')
+
+	speaker_1 = models.ForeignKey(Student, related_name='student_speaker1_type', blank=True)
+	speaker_2 = models.ForeignKey(Student, related_name='student_speaker2_type', blank=True)
+	crossexamination = models.ForeignKey(Student, related_name='student_cross_type', blank=True)
+	slideshow = models.ForeignKey(Student, related_name='student_slide_type', blank=True)
+	rebuttal = models.ForeignKey(Student, related_name='student_rebutt_type', blank=True)
  	#End of roles
 	teamnumber = models.CharField(max_length=20)
  	#Not sure about this syntax --  may want to ask terrence
-	topic = models.CharField(max_length=255)
-	school = models.CharField(max_length=255)
+	topic = models.ForeignKey(Topic)
+	school = models.ForeignKey(School)
 	#Is pro? True/False	
-	affirmative = models.BooleanField((Affirmative), default = False)
+	affirmative = models.BooleanField(default = False)
  	#end of unknown syntax
  	teacher = models.ForeignKey(GoogleUser)
  	def __unicode__(self):
@@ -123,33 +156,22 @@ class SubmittedNegativeScore(models.Model):
 	TeamNumber = models.ForeignKey(Team)
 	def __unicode__(self):
 				return u'%s' % self.TeamNumber
-class Topic(models.Model):
-	topic = models.CharField(max_length=25)
-	description = models.CharField(max_length=255)
-	def __unicode__(self):
-				return u'%s' % self.topic
-
 
 class Location(models.Model):
 	location = models.CharField(max_length=255)
 	def __unicode__(self):
 				return u'%s' % self.location
 
+class Period(models.Model):
+	period = models.CharField(max_length=255)
+	def __unicode__(self):
+				return u'%s' % self.Period
+
 	
 class Date(models.Model):
 	date = models.CharField(max_length=255)
 	def __unicode__(self):
 				return u'%s' % self.date
-
-
-
-class School(models.Model):#Also admin
-	name = models.CharField(max_length=25)
-	district = models.CharField(max_length=25)
-	description = models.CharField(max_length=255)
-	is_staff = models.BooleanField(('staff status'),default=True)
-	def __unicode__(self):
-			return u'%s' % self.name
 
 class Debate(models.Model):
  	#Affirmative team
@@ -160,16 +182,16 @@ class Debate(models.Model):
  	date = models.ForeignKey(Date)
  	#Location of debate
  	location =models.ForeignKey(Location)
+ 	#Period
+ 	period = models.ForeignKey(Period)
  	#school
  	school = models.ForeignKey(School)
  	#topic
  	topic = models.ForeignKey(Topic)
+ 	#spectators
+ 	spectators = models.ManyToManyField(Team:  CheckboxSelectMultiple, blank=True)
 
 
-
-class SCORE_OPTIONS(models.Model):
-	SCORE_CHOICES = [(5,'5'),(6,'6'),(7,'7'),(8,'8'),(9,'9'),(10,'10')]
-	scores = models.BigIntegerField(verbose_name='scores:', choices=SCORE_CHOICES)
 
 class CustomUser(models.Manager):
     """
