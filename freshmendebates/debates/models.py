@@ -189,7 +189,7 @@ class Debate(models.Model):
  	#topic
  	topic = models.ForeignKey(Topic)
  	#spectators
- 	spectators = models.ManyToManyField(Team:  CheckboxSelectMultiple, blank=True)
+ 	spectators = models.ManyToManyField(Team, blank=True)
 
 
 
