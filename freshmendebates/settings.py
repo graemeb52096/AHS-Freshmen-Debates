@@ -2,7 +2,7 @@
 import os
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
+PROJECT_ROOT = os.path.abspath(os.path.dirname(__name__))
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -226,27 +226,27 @@ LOGGING = {
         'dev_debug':{
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': PROJECT_ROOT + '/freshmendebates/Logs/debug.log'
+            'filename': PROJECT_ROOT + '/Logs/debug.log'
         },
         'dev_info':{
             'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename': PROJECT_ROOT + '/freshmendebates/Logs/info.log'
+            'filename': PROJECT_ROOT + '/Logs/info.log'
         },
         'dev_warning':{
             'level': 'WARNING',
             'class': 'logging.FileHandler',
-            'filename': PROJECT_ROOT + '/freshmendebates/Logs/warning.log'
+            'filename': PROJECT_ROOT + '/Logs/warning.log'
         },
         'dev_error':{
             'level': 'ERROR',
             'class': 'logging.FileHandler',
-            'filename': PROJECT_ROOT + '/freshmendebates/Logs/error.log'
+            'filename': PROJECT_ROOT + '/Logs/error.log'
         },
         'dev_critical':{
             'level': 'CRITICAL',
             'class': 'logging.FileHandler',
-            'filename': PROJECT_ROOT + '/freshmendebates/Logs/critical.log'
+            'filename': PROJECT_ROOT + '/Logs/critical.log'
         }
 
     },
