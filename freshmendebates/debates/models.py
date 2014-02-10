@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
 from django.contrib import admin
 from django.core.urlresolvers import reverse
@@ -51,23 +52,6 @@ class Topic(models.Model):
 	description = models.CharField(max_length=255)
 	def __unicode__(self):
 				return u'%s' % self.topic
-class Affirmative(models.Model):	
-	Speaker1 = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
-	Speaker2 = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
-	CrossExamination = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
-	Argument = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
-	SlideShowScore = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
-	Rebuttal = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
-	#R = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
-
-class Negative(models.Model):
-	Speaker1 = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
-	Speaker2 = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
-	CrossExamination = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
-	Argument = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
-	SlideShowScore = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
-	Rebuttal = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
-	#R = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
 
 class GoogleUser(models.Model):
 	first_name = models.CharField(max_length=255)
@@ -80,8 +64,14 @@ class GoogleUser(models.Model):
 	is_superuser = models.BooleanField(('super status'),default=False)
 	date_joined = models.DateTimeField(('date joined'), default=timezone.now)
 	def create_user(self, first_name, last_name, email, password):
-		user = User.objects.create_user(first_name, email, password)
+		user = User.objects.create_user(username = first_name, email = email, password = password)
+		user.first_name = first_name
 		user.last_name = last_name
+		user.is_staff = True
+		g = Group.objects.get(name='Teachers') 
+		g.user_set.add(user)
+		logger.debug('teacher password ' + password)
+		user.save()
 		return user
 		logger.debug('New user has been saved')	
 	def __unicode__(self):
@@ -96,7 +86,7 @@ class Student(models.Model):
 	IHSTeacher = models.ForeignKey(GoogleUser, related_name='IHSTeacher')
 	IHSPeriod = models.CharField(max_length=255)
 	def __unicode__(self):
-				return u'%s' % self.last_name
+				return u'%s' % self.last_name + ', ' + self.first_name
 	# class Meta:
  #    		app_label="classes"
 
@@ -112,7 +102,7 @@ class Team(models.Model):
 	Student_2 = models.ForeignKey(Student, related_name='student2_type')
 	Student_3 = models.ForeignKey(Student, related_name='student3_type')
 	Student_4 = models.ForeignKey(Student, related_name='student4_type')
-	Student_5 = models.ForeignKey(Student, related_name='student5_type')
+	Student_5 = models.ForeignKey(Student, related_name='student5_type', blank = True)
  	#Start of roles -- getting students names tied into roles.
 
 	speaker_1 = models.ForeignKey(Student, related_name='student_speaker1_type', blank=True)
@@ -121,7 +111,7 @@ class Team(models.Model):
 	slideshow = models.ForeignKey(Student, related_name='student_slide_type', blank=True)
 	rebuttal = models.ForeignKey(Student, related_name='student_rebutt_type', blank=True)
  	#End of roles
-	teamnumber = models.CharField(max_length=20)
+	team_Number = models.CharField(max_length=20)
  	#Not sure about this syntax --  may want to ask terrence
 	topic = models.ForeignKey(Topic)
 	school = models.ForeignKey(School)
@@ -130,27 +120,48 @@ class Team(models.Model):
  	#end of unknown syntax
  	teacher = models.ForeignKey(GoogleUser)
  	def __unicode__(self):
-				return u'%s' % self.teamnumber
+				return u'%s' % self.team_Number
+
+class Affirmative_form(models.Model):	
+	Speaker1 = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
+	Speaker2 = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
+	CrossExamination = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
+	Argument = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
+	SlideShowScore = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
+	Rebuttal = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
+	#R = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
+	TeamNumber = models.ForeignKey(Team)
+
+class Negative_form(models.Model):
+	Speaker1 = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
+	Speaker2 = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
+	CrossExamination = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
+	Argument = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
+	SlideShowScore = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
+	Rebuttal = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
+	#R = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
+	TeamNumber = models.ForeignKey(Team)
 
 
 class SubmittedAffirmativeScore(models.Model):
-	Speaker1 = models.CharField(max_length=3)
-	Speaker2 = models.CharField(max_length=3)
-	CrossExamination = models.CharField(max_length=3)
-	Argument = models.CharField(max_length=3)
-	SlideShowScore = models.CharField(max_length=3)
+	Speaker1 = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
+	Speaker2 = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
+	CrossExamination = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
+	Argument = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
+	SlideShowScore = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
 	Rebuttal = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
 
+	
 	TeamNumber = models.ForeignKey(Team)
 	def __unicode__(self):
 				return u'%s' % self.TeamNumber
 
 class SubmittedNegativeScore(models.Model):
-	Speaker1 = models.CharField(max_length=3)
-	Speaker2 = models.CharField(max_length=3)
-	CrossExamination = models.CharField(max_length=3)
-	Argument = models.CharField(max_length=3)
-	SlideShowScore = models.CharField(max_length=3)
+	Speaker1 = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
+	Speaker2 = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
+	CrossExamination = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
+	Argument = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
+	SlideShowScore = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
 	Rebuttal = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
 
 	TeamNumber = models.ForeignKey(Team)
@@ -165,7 +176,7 @@ class Location(models.Model):
 class Period(models.Model):
 	period = models.CharField(max_length=255)
 	def __unicode__(self):
-				return u'%s' % self.Period
+				return u'%s' % self.period
 
 	
 class Date(models.Model):
@@ -190,6 +201,8 @@ class Debate(models.Model):
  	topic = models.ForeignKey(Topic)
  	#spectators
  	spectators = models.ManyToManyField(Team, blank=True)
+ 	def __unicode__(self):
+				return u'%s' % self.topic
 
 
 

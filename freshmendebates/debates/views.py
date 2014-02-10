@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from debates.models import Topic,Location,Date,User,Affirmative,Negative,SubmittedAffirmativeScore,SubmittedNegativeScore,GoogleUser,Student
+from debates.models import Topic,Location,Date,User,Affirmative_form,Negative_form,SubmittedAffirmativeScore,SubmittedNegativeScore,GoogleUser,Student
 from debates.forms import AffirmativeScore,NegativeScore,RegistrationForm,ImportExcelForm
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect, HttpResponse, HttpResponseServerError
@@ -39,7 +39,8 @@ def judge(request):
 				CE = Affform.cleaned_data.get('CrossExamination')
 				SSS = Affform.cleaned_data.get('SlideShowScore')
 				Arg = Affform.cleaned_data.get('Argument')
-				#RB = Affform.cleaned_data.get('Rebuttal')
+				RB = Affform.cleaned_data.get('Rebuttal')
+				TN = Affform.cleaned_data.get('Team')
 				#creating an instance of submitted scores to save to data base.
 				p = SubmittedAffirmativeScore()
 				p.Speaker1 = S1
@@ -47,8 +48,8 @@ def judge(request):
 				p.CrossExamination = CE
 				p.SlideShowScore = SSS
 				p.Argument = Arg
-				#p.R = RB
-				p.TeamNumber = 'Test, still need to get team numbers'
+				p.Rebuttal = RB
+				p.TeamNumber = ''
 				p.save()
 				logger.debug('Negative form has been saved')
 		elif 'form_Negative' in request.POST:
@@ -62,7 +63,8 @@ def judge(request):
 				CE = Negform.cleaned_data.get('CrossExamination')
 				SSS = Negform.cleaned_data.get('SlideShowScore')
 				Arg = Negform.cleaned_data.get('Argument')
-				#RB = Negform.cleaned_data.get('Rebuttal')
+				RB = Negform.cleaned_data.get('Rebuttal')
+				TN = Negform.cleaned_data.get('Team')
 				logger.debug('Negative form is valid!')
 				#creating an instance of submitted scores to save to data base.
 				p = SubmittedNegativeScore()
@@ -71,8 +73,8 @@ def judge(request):
 				p.CrossExamination = CE
 				p.SlideShowScore = SSS
 				p.Argument = Arg
-				#p.R = RB
-				p.TeamNumber = 'Test, still need to get team numbers'
+				p.Rebuttal = RB
+				p.TeamNumber = ''
 				p.save()
 				logger.debug('Negative form has been saved')
 				#msg = "The operation has been received correctly."

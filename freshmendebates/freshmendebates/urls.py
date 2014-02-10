@@ -6,7 +6,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
 
-	url(r'^Judge$','debates.views.judge'),
+	url(r'^Judge_nu_scoring$','debates.views.judge'),
 	url(r'^SplashPage$','debates.views.splash'),
 	url(r'^Teacher$','debates.views.teacher'),
 	url(r'^TeacherSelector$','debates.views.teacherselector'),

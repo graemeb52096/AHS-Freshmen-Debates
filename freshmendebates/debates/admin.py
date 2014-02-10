@@ -1,5 +1,5 @@
 from django.contrib import admin
-from debates.models import Topic,Location,Date,Affirmative,Negative,SubmittedAffirmativeScore,SubmittedNegativeScore,School,GoogleUser,Student,Team,Debate,Period
+from debates.models import Topic,Location,Date,Affirmative_form,Negative_form,SubmittedAffirmativeScore,SubmittedNegativeScore,School,GoogleUser,Student,Team,Debate,Period
 
 
 admin.site.register(Topic)

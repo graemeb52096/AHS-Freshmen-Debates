@@ -2,7 +2,7 @@ from django import forms
 from django.db import models
 from debates.models import GoogleUser
 from django.forms import ModelForm
-from debates.models import Affirmative,Negative
+from debates.models import Affirmative_form,Negative_form
 from django.forms import CheckboxSelectMultiple
 
 SCORE_CHOICES = (
@@ -31,7 +31,7 @@ class AffirmativeScore(ModelForm):
 		Argument = scores.choices
 		Rebuttal = scores.choices
 		class Meta:
-			model = Affirmative
+			model = Affirmative_form
 class NegativeScore(ModelForm):
 		SlideShowScore = scores.choices
 		Speaker1 = scores.choices
@@ -40,7 +40,7 @@ class NegativeScore(ModelForm):
 		Argument = scores.choices
 		Rebuttal = scores.choices
 		class Meta:
-			model = Negative
+			model = Negative_form
 class RegistrationForm(ModelForm):
 		FirstName = models.CharField(max_length=255)
 		LastName = models.CharField(max_length=255)
