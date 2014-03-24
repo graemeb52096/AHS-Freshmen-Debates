@@ -26,24 +26,24 @@ for row in dataReader:
 			student = Student()
 			logger.debug('Student has begun')
 			fullname = row[0]
-			logger.debug('Students fullname ' + fullname)
+			logger.debug('Student\'s fullname ' + fullname)
 			splitName = fullname.split(',' , 1)
 			first_name = splitName[1]
 			logger.debug('Students first name ' + first_name)
 			last_name = splitName[0]
 			logger.debug('Student last name ' + last_name)
 			student.englishPeriod = row[1]
-			logger.debug('Student has english period ' + student.englishPeriod)
+			logger.debug('Student has English period ' + student.englishPeriod)
 			student.englishTeacher = englishTeacherGet
-			logger.debug('Students english teacher is ' + englishTeacher)
+			logger.debug('Student\'s English teacher is ' + englishTeacher)
 			student.save()
 		elif row[0] == student.first_name and count != 0:
 			IHSTeacher = row[2]
 			IHSTeacherGet = GoogleUser.objects.get(last_name = IHSTeacher)
 			student.englishPeriod = row[1]
-			logger.debug('Student has english period ' + student.englishPeriod)
+			logger.debug('Student has English period ' + student.englishPeriod)
 			student.IHSTeacher = IHSTeacherGet
-			logger.debug('Students IHS teacher is ' + IHSTeacher)
+			logger.debug('Student\'s IHS teacher is ' + IHSTeacher)
 			student.save()
 		elif row[3] == "900012":
 			IHSTeacher = row[2]
@@ -51,12 +51,12 @@ for row in dataReader:
 			student = Student()
 			logger.debug('Student has begun')
 			fullname = row[0]
-			logger.debug('Students fullname ' + fullname)
+			logger.debug('Student\'s fullname ' + fullname)
 			splitName = fullname.split(',' , 1)
 			first_name = splitName[1]
-			logger.debug('Students first name ' + first_name)
+			logger.debug('Student\'s first name ' + first_name)
 			last_name = splitName[0]
-			logger.debug('Student last name ' + last_name)
+			logger.debug('Student\'s last name ' + last_name)
 			student.first_name = first_name
 			logger.debug('Student has first name '+ student.first_name)
 			student.last_name = last_name
@@ -74,8 +74,8 @@ for row in dataReader:
 			student.last_name = last_name
 			logger.debug('Student has last name '+ student.last_name)
 			student.englishPeriod = row[1]
-			logger.debug('Student has english period ' + student.englishPeriod)
+			logger.debug('Student has English period ' + student.englishPeriod)
 			student.englishTeacher = englishTeacherGet
-			logger.debug('Students english teacher is ' + englishTeacher)
+			logger.debug('Student\'s English teacher is ' + englishTeacher)
 			student.save()
 	counter += 1
