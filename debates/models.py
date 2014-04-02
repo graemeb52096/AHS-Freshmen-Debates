@@ -13,6 +13,9 @@ from csvImporter.model import CsvDbModel
 from django.forms import CheckboxSelectMultiple
 from django.forms.models import ModelMultipleChoiceField
 from django import forms
+from django.forms.widgets import RadioSelect, CheckboxSelectMultiple
+
+
 
 logger = logging.getLogger('logview.debugger')
 DEBATE_DAY_CHOICES = ('1st', '2nd')
@@ -41,7 +44,7 @@ ROLE_CHOICES = (
 class School(models.Model):#Also admin
 	name = models.CharField(max_length=25)
 	district = models.CharField(max_length=25)
-	description = models.CharField(max_length=255)
+	description = models.CharField(max_length=150)
 	is_staff = models.BooleanField(('staff status'),default=True)
 	def __unicode__(self):
 			return u'%s' % self.name
@@ -49,26 +52,25 @@ class School(models.Model):#Also admin
 			
 class Topic(models.Model):
 	topic = models.CharField(max_length=25)
-	description = models.CharField(max_length=255)
+	description = models.CharField(max_length=150)
 	def __unicode__(self):
 				return u'%s' % self.topic
 
 class GoogleUser(models.Model):
-	first_name = models.CharField(max_length=255)
-	last_name = models.CharField(max_length=255)
+	first_name = models.CharField(max_length=50)
+	last_name = models.CharField(max_length=50)
 	role = models.CharField(max_length=2, choices=ROLE_CHOICES)
 	email = models.CharField(max_length=30)
-	password = models.CharField(max_length=255)
-	is_admin = models.BooleanField(('admin status'),default=False)
-	is_staff = models.BooleanField(('staff status'),default=True)
-	is_superuser = models.BooleanField(('super status'),default=False)
+	password = models.CharField(max_length=150)
 	date_joined = models.DateTimeField(('date joined'), default=timezone.now)
-	def create_user(self, first_name, last_name, email, password):
+	def create_user(self, first_name, last_name, email, password, role):
 		user = User.objects.create_user(username = first_name, email = email, password = password)
 		user.first_name = first_name
 		user.last_name = last_name
-		user.is_staff = True
-		g = Group.objects.get(name='Teachers') 
+		if role == 0 or role == 1:
+			user.is_staff = True
+		if role == 1:
+			g = Group.objects.get(name='Teachers') 
 		g.user_set.add(user)
 		logger.debug('teacher password ' + password)
 		user.save()
@@ -123,24 +125,31 @@ class Team(models.Model):
 				return u'%s' % self.team_Number
 
 class Affirmative_form(models.Model):	
-	Speaker1 = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
-	Speaker2 = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
-	CrossExamination = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
-	Argument = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
-	SlideShowScore = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
-	Rebuttal = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
+	Speaker1 = models.CharField(max_length=2, choices=SCORE_CHOICES, blank = False)
+	Speaker2 = models.CharField(max_length=2, choices=SCORE_CHOICES, blank = False)
+	Speaker3 = models.CharField(max_length=2, choices=SCORE_CHOICES, blank = True)
+	CrossExamination = models.CharField(max_length=2, choices=SCORE_CHOICES, blank = False)
+	SlideShowScore = models.CharField(max_length=2, choices=SCORE_CHOICES, blank = False)
+	Rebuttal = models.CharField(max_length=2, choices=SCORE_CHOICES, blank = False)
+	
+	Argument = models.CharField(max_length=2, choices=SCORE_CHOICES, blank = False)
 	#R = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
 	TeamNumber = models.ForeignKey(Team)
+	Notes = models.TextField(max_length = 150)
 
 class Negative_form(models.Model):
-	Speaker1 = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
-	Speaker2 = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
-	CrossExamination = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
-	Argument = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
-	SlideShowScore = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
-	Rebuttal = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
+	Speaker1 = models.CharField(max_length=2, choices=SCORE_CHOICES, blank = False)
+	Speaker2 = models.CharField(max_length=2, choices=SCORE_CHOICES, blank = False)
+	Speaker3 = models.CharField(max_length=2, choices=SCORE_CHOICES, blank = False)
+	CrossExamination = models.CharField(max_length=2, choices=SCORE_CHOICES, blank = False)
+	SlideShowScore = models.CharField(max_length=2, choices=SCORE_CHOICES, blank = False)
+	Rebuttal = models.CharField(max_length=2, choices=SCORE_CHOICES, blank = False)
+	
+	Argument = models.CharField(max_length=2, choices=SCORE_CHOICES, blank = False)
 	#R = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
 	TeamNumber = models.ForeignKey(Team)
+	
+	Notes = models.TextField(max_length = 150)
 
 
 class SubmittedAffirmativeScore(models.Model):
@@ -174,13 +183,13 @@ class Location(models.Model):
 				return u'%s' % self.location
 
 class Period(models.Model):
-	period = models.CharField(max_length=255)
+	period = models.IntegerField(max_length=2)
 	def __unicode__(self):
 				return u'%s' % self.period
 
 	
 class Date(models.Model):
-	date = models.CharField(max_length=255)
+	date = models.DateTimeField()
 	def __unicode__(self):
 				return u'%s' % self.date
 

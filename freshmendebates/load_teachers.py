@@ -1,11 +1,11 @@
 import logging
 logger = logging.getLogger('logview.debugger')
 
-your_djangoproject_home="/AHS-Freshmen-Debates/freshmendebates/freshmendebates/"
+your_djangoproject_home="/AHS-Freshmen-Debates/"
 
 import sys,os
 sys.path.append(your_djangoproject_home)
-os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'freshmendebates.settings'
 
 from django.forms.extras.widgets import SelectDateWidget
 import datetime
@@ -13,12 +13,8 @@ from django.db import models
 from debates.models import GoogleUser
 
 from django.utils import timezone
-
-logger = logging.getLogger('logview.debugger')
-# Full path and name to your csv file
-csv_filepathname="/AHS-Freshmen-Debates/freshmendebates/freshmen.csv"
 # Full path to your django project directory
-your_djangoproject_home="/AHS-Freshmen-Debates/freshmendebates/freshmendebates/"
+your_djangoproject_home="/AHS-Freshmen-Debates/"
 
 import sys,os
 sys.path.append(your_djangoproject_home)
@@ -38,7 +34,7 @@ teacher.is_staff = True
 teacher.is_superuser = False
 
 teacher.save()
-teacher.create_user(teacher.first_name, teacher.last_name, teacher.email, teacher.password)
+teacher.create_user(teacher.first_name, teacher.last_name, teacher.email, teacher.password, teacher.role)
 
 teacher = GoogleUser()
 
@@ -53,7 +49,7 @@ teacher.is_staff = True
 teacher.is_superuser = False
 
 teacher.save()
-teacher.create_user(teacher.first_name, teacher.last_name, teacher.email, teacher.password)
+teacher.create_user(teacher.first_name, teacher.last_name, teacher.email, teacher.password, teacher.role)
 
 teacher = GoogleUser()
 
@@ -67,7 +63,7 @@ teacher.is_staff = True
 teacher.is_superuser = False
 
 teacher.save()
-teacher.create_user(teacher.first_name, teacher.last_name, teacher.email, teacher.password)
+teacher.create_user(teacher.first_name, teacher.last_name, teacher.email, teacher.password, teacher.role)
 
 teacher = GoogleUser()
 
@@ -81,7 +77,7 @@ teacher.is_staff = True
 teacher.is_superuser = False
 
 teacher.save()
-teacher.create_user(teacher.first_name, teacher.last_name, teacher.email, teacher.password)
+teacher.create_user(teacher.first_name, teacher.last_name, teacher.email, teacher.password, teacher.role)
 
 teacher = GoogleUser()
 
@@ -95,7 +91,7 @@ teacher.is_staff = True
 teacher.is_superuser = False
 
 teacher.save()
-teacher.create_user(teacher.first_name, teacher.last_name, teacher.email, teacher.password)
+teacher.create_user(teacher.first_name, teacher.last_name, teacher.email, teacher.password, teacher.role)
 
 teacher = GoogleUser()
 
@@ -109,7 +105,7 @@ teacher.is_staff = True
 teacher.is_superuser = False
 
 teacher.save()
-teacher.create_user(teacher.first_name, teacher.last_name, teacher.email, teacher.password)
+teacher.create_user(teacher.first_name, teacher.last_name, teacher.email, teacher.password, teacher.role)
 
 teacher = GoogleUser()
 
@@ -123,7 +119,7 @@ teacher.is_staff = True
 teacher.is_superuser = False
 
 teacher.save()
-teacher.create_user(teacher.first_name, teacher.last_name, teacher.email, teacher.password)
+teacher.create_user(teacher.first_name, teacher.last_name, teacher.email, teacher.password, teacher.role)
 
 teacher = GoogleUser()
 
@@ -137,5 +133,5 @@ teacher.is_staff = True
 teacher.is_superuser = False
 
 teacher.save()
-teacher.create_user(teacher.first_name, teacher.last_name, teacher.email, teacher.password)
+teacher.create_user(teacher.first_name, teacher.last_name, teacher.email, teacher.password, teacher.role)
 

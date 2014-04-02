@@ -76,7 +76,7 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    PROJECT_ROOT + "/freshmendebates/freshmendebates/static/",
+    PROJECT_ROOT + "/freshmendebates/static/",
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -117,7 +117,7 @@ ROOT_URLCONF = 'freshmendebates.urls'
 WSGI_APPLICATION = 'freshmendebates.wsgi.application'
 
 TEMPLATE_DIRS = (
-    PROJECT_ROOT + "/freshmendebates/freshmendebates/templates/"
+    PROJECT_ROOT + "/freshmendebates/templates/debates/"
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.

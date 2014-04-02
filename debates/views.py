@@ -86,7 +86,7 @@ def judge(request):
 			msg = "The operation has been received correctly."
 			logger.debug(msg)
 
-	return render(request,'debates/judge.html', {
+	return render(request,'judge.html', {
 		'Affirmative_Form':Affform, 'Negative_Form':Negform,
 	})
 def new_user(request):
@@ -147,6 +147,8 @@ def teacherselector(request):
 	}) 
 
 def teamcreate(request):
+	Submit_form = 'null'
+	new_team = Team()
 
 	return render(request,'debates/TeamCreate.html', {
 	})	
@@ -172,12 +174,24 @@ def test_flowcell(request):
     	'form':form,
     	})
 
-def databasesetup(request):
-	
-	#my_csv_list = MyCsvModel.import_data(data = open("/AHS-Freshmen-Debates/freshmendebates/freshmen.csv"))
-	#first_line = my_csv_list[0]  
-
-	return render(request,'debates/judge.html',{
-	})
-
+#def CSVUpload(request):
+#	
+#	if request.method == 'POST':
+#	    form = MyForm(request.POST, request.FILES)
+#	    if form.is_valid():
+#	        uploaded_file = request.FILES['html-file-attribute-name']
+#
+#	        # Write the file to disk
+#	        fout = open("path/to/save/file/to/%s" % uploaded_file.name, 'wb')
+#	        for chunk in uploaded_file.chunks():
+#	            fout.write(chunk)
+#	        fout.close()
+#			
+#	    else:
+#	         form = codeUploadForm()
+#	         context = {'form':form}
+#	         return render_to_response('import.html', context, context_instance=RequestContext(request))
+#
+#	return render(request,{
+#	})
 

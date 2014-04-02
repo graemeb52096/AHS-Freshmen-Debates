@@ -51,17 +51,36 @@ class RegistrationForm(ModelForm):
 			model = GoogleUser
 
 class ImportExcelForm(forms.Form):
-    	file  = forms.FileField(label= "Choose excel to upload")
-
+        file = forms.FileField()
+        def save(self):
+            records = csv.reader(self.cleaned_data('file'), delimiter=',', quotechar='"')
+            for line in record:
+                if row[0] != 'Student Name': # Ignore the header row, import everything else
+                    if row[0] != input_student.fullname:
+                        englishTeacher = row[2]
+                        englishTeacherGet = GoogleUser.objects.get(last_name = englishTeacher)
+                    
+                        input_student = student()
+                        fullname = row[0]
+                        splitName = fullname.split(',' , 1)
+                        input_student.first_name = splitName[1]
+                        input_student.last_name = splitName[0]
+                        input_data.save()
+						
+class UploadFileForm(forms.Form):
+		title = forms.CharField(max_length=50)
+		file  = forms.FileField()
+		
+		
 # class Team(ModelForm):
-# 		DebateTopic = 
-# 		Side = 
-# 		TeamNumber = 
-# 		TeamName = 
-# 		SlideShowSpeaker = 
-# 		Speaker1 = 
-# 		Speaker2 = 
-# 		CrossExamination = 
-# 		Rebuttal = 
-# 		class Meta:
-# 			model = Team
+#  		DebateTopic = 
+#  		Side = 
+#  		TeamNumber = 
+#  		TeamName = 
+#  		SlideShowSpeaker = 
+#  		Speaker1 = 
+#  		Speaker2 = 
+#  		CrossExamination = 
+#  		Rebuttal = 
+#  		class Meta:
+#  		 			model = Team

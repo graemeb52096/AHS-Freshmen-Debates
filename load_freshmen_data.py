@@ -2,13 +2,13 @@ import logging
 
 logger = logging.getLogger('logview.debugger')
 # Full path and name to your csv file
-csv_filepathname="/AHS-Freshmen-Debates/freshmendebates/freshmen.csv"
+csv_filepathname="/AHS-Freshmen-Debates/freshmen.csv"
 # Full path to your django project directory
 your_djangoproject_home="/AHS-Freshmen-Debates/freshmendebates/freshmendebates/"
 
 import sys,os
 sys.path.append(your_djangoproject_home)
-os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'freshmendebates.settings'
 
 from debates.models import Student, GoogleUser
 
