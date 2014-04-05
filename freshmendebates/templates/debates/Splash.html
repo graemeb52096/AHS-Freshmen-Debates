@@ -1,39 +1,30 @@
 
 <html>
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}DebateSite.css">
 <script type="text/javascript">
-	if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-		document.write('<link rel="stylesheet" type="text/css" href="SplashpageMobile.css">');
-	}
-	else
-	{
-		document.write('<link rel="stylesheet" type="text/css" href="Splashpage.css">');
-	}
 </script>
 
 <head>
 	<title>Splash Page</title>
 </head>
 <body>
-	<div id="Banner">
-		Albany High School Freshmen Debates
+	<div class="Banner">
+		Albany High School Freshmen Debates <a href="{% url 'socialauth_begin' 'google-oauth2' %}">Login with Google</a>
 	</div>
 	<div id="MainBody">
 
-		<div id="SelectT">
+		<div id="SelectT" class="Button">
 			<h1>Teachers</h1>
-			<br>
 			<h2>Manage debate teams, check grades and upcoming debates.</h2>
 			<br>
 		</div>
-		<div id="SelectA">
+		<div id="SelectA" class="Button">
 			<h1>Admin</h1>
-			<br>
 			<h2>Ms. O, log in here to manage debates and organize everything.</h2>
 			<br>
 		</div>
-		<div id="SelectJ">
+		<div id="SelectJ" class="Button">
 			<h1>Judges</h1>
-			<br>
 			<h2>Judge debates, view and manage debates you will judge.</h2>
 			<br>
 		</div>
@@ -49,28 +40,28 @@
 
 		something.style.cursor = 'pointer';
 		something.onclick = function() {
-			window.open ('Admin.html','_self',false)
+			window.open ('admin','_self',false)
 		};
 
 		var something = document.getElementById('SelectT');
 
 		something.style.cursor = 'pointer';
 		something.onclick = function() {
-			window.open ('Teacher.html','_self',false)
+			window.open ('TeacherSelector','_self',false)
 		};
 
 		var something = document.getElementById('SelectJ');
 
 		something.style.cursor = 'pointer';
 		something.onclick = function() {
-			window.open ('DebateSelector.html','_self',false)
+			window.open ('DebateSelector','_self',false)
 		};
 
 		var something = document.getElementById('LogIn');
 
 		something.style.cursor = 'pointer';
 		something.onclick = function() {
-			window.open ('LogIn.html','_self',false)
+			window.open ('LogIn','_self',false)
 		};
 	</script>
 

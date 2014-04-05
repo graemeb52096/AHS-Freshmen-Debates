@@ -1,10 +1,10 @@
 <html>
-<link rel="stylesheet" type="text/css" href="Teacher.css">
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}DebateSite.css">
 <head>
 	<title>Teacher</title>
 </head>
 <body>
-	<div id="Banner">
+	<div class="Banner">
 		Albany High School Freshmen Debates
 	</div>
 
@@ -17,48 +17,44 @@
 	<!-- Need to find a way to grab teams and create the same amount of divs as teams. -->
 	<!-- Include Teams name and Topic above div somehow-->
 	<div id="Team"> <!-- Find a way to collapse scores so teacher can view either one team at a time or all-->
-		<h2>"Team Name, Side and Topic"</h2>
+		<h3>"Team Name, Side and Topic"</h3>
 	</h1>"Date and Location"</h1>	
 	<div id="ScoreBox">
-		<h1>
-			Slide Show Average: "Data"
+		<h2>
+			Slide Show Average: {{Team.SlideShowScore}}
 			<br>
 			<br>
 			<!-- Include Speaker's name somehow-->
-			Speaker 1 Average: "Data"
+			Speaker 1 Average: {{Team.Speaker1}}
 			<br>
 			<br>
 			<!-- Include Speaker's name somehow-->
-			Speaker 2 Average: "Data"
+			Speaker 2 Average: {{Team.Speaker2}}
 			<br>
 			<br>
-			<!-- Include Speaker's name somehow-->
-			Speaker 3 Average: "Data"
+			Group Argument Average: {{Team.Argument}}
 			<br>
 			<br>
-			Group Argument Average: "Data"
-			<br>
-			<br>
-			Cross Examination Average: "Data"
+			Cross Examination Average: {{Team.CrossExamintion}}
 			<br>
 			<br>
 			<!-- Include Speaker's name somehow-->
 			Rebuttal Average: "Data"
 			<br>
 			<br>
-		</h1>
-		<h3>
+		</h2>
+		<h5>
 			Total Score Average: "Data"
-		</h3>
+		</h5>
 	</div>
 </div>
 
 <!-- Include Teams name and Topic above div somehow-->
 <div id="Team"> <!-- Find a way to collapse scores so teacher can view either one team at a time or all-->
-	<h2>"Team Name, Side and Topic"</h2>
+	<h3>"Team Name, Side and Topic"</h3>
 </h1>"Date and Location"</h1>	
 <div id="ScoreBox">
-	<h1>
+	<h2>
 		Slide Show Average: "Data"
 		<br>
 		<br>
@@ -68,10 +64,6 @@
 		<br>
 		<!-- Include Speaker's name somehow-->
 		Speaker 2 Average: "Data"
-		<br>
-		<br>
-		<!-- Include Speaker's name somehow-->
-		Speaker 3 Average: "Data"
 		<br>
 		<br>
 		Group Argument Average: "Data"
@@ -84,20 +76,20 @@
 		Rebuttal Average: "Data"
 		<br>
 		<br>
-	</h1>
-	<h3>
+	</h2>
+	<h5>
 		Total Score Average: "Data"
-	</h3>
+	</h5>
 </div>
 </div>
 
 
 <!-- Include Teams name and Topic above div somehow-->
 <div id="Team"> <!-- Find a way to collapse scores so teacher can view either one team at a time or all-->
-	<h2>"Team Name, Side and Topic"</h2>
+	<h3>"Team Name, Side and Topic"</h3>
 </h1>"Date and Location"</h1>	
 <div id="ScoreBox">
-	<h1>
+	<h2>
 		Slide Show Average: "Data"
 		<br>
 		<br>
@@ -107,10 +99,6 @@
 		<br>
 		<!-- Include Speaker's name somehow-->
 		Speaker 2 Average: "Data"
-		<br>
-		<br>
-		<!-- Include Speaker's name somehow-->
-		Speaker 3 Average: "Data"
 		<br>
 		<br>
 		Group Argument Average: "Data"
@@ -123,10 +111,10 @@
 		Rebuttal Average: "Data"
 		<br>
 		<br>
-	</h1>
-	<h3>
+	</h2>
+	<h5>
 		Total Score Average: "Data"
-	</h3>
+	</h5>
 </div>
 </div>
 

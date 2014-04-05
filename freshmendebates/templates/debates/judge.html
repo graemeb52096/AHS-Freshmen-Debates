@@ -1,0 +1,106 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}DebateSite.css">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+	jQuery(function() {
+
+			var form_Negative = jQuery("#form_Negative")
+			console.log (form_Negative)
+			form_Negative.submit(function(e){
+				jQuery("#sendbutton_Negative").attr('disabled', true)
+				jQuery("#sendwrapper_Negative").prepend('<span>Sending message, please wait... </span>')
+				jQuery("#ajaxwrapper_Negative").load(
+					form_Negative.attr('action') + ' #ajaxwrapper_Negative',
+					form_Negative.serializeArray(),
+					function(responseText, responseStatus) {
+						jQuery("#sendbutton_Negative").attr('disabled', false)
+					}
+
+				);
+				e.preventDefault();
+			});
+		});
+
+	jQuery(function() {
+
+		var form_Positive = jQuery("#form_Positive")
+		console.log (form_Positive)
+		form_Positive.submit(function(e){
+			jQuery("#sendbutton_Positive").attr('disabled', true)
+			jQuery("#sendwrapper_Positive").prepend('<span>Sending message, please wait... </span>')
+			jQuery("#ajaxwrapper_Positive").load(
+				form_Positive.attr('action') + ' #ajaxwrapper_Positive',
+				form_Positive.serializeArray(),
+				function(responseText, responseStatus) {
+					jQuery("#sendbutton_Positive").attr('disabled', false)
+				}
+
+			);
+			e.preventDefault();
+		});
+	});
+</script>
+</head>
+<body>
+<div class="Banner">
+		Albany High School Freshmen Debates
+	</div>
+
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+
+
+	<div id="Boxes">
+
+		<div id="AffirmativeNegativeDiv">
+			<div id="ScoreBox">
+				
+
+				<h1>Affirmative</h1>
+				<br>
+
+				    <form method='post' id="form_Positive">
+				    <div id="ajaxwrapper_Positive">
+				    	{% csrf_token %}
+						<br>
+						<br>
+						<ul>
+						{{ Affirmative_Form.as_p }}
+						<input type="hidden" name="form_Positive" value="form_Positive">
+						</ul>
+						<p id="sendwrapper_Positive"><input type='submit' value='Submit Positive' /></p>
+					</div>
+				</form>
+			</div>
+
+			<div id="ScoreBoxNeg">
+				
+				<h1>Negative</h1>
+				<br>
+					<form method='post' id="form_Negative">
+					<div id="ajaxwrapper_Negative">
+				    	{% csrf_token %}
+						<br>
+						<br>
+						<ul>
+						{{ Negative_Form.as_p }}
+						<input type="hidden" name="form_Negative" value="form_Negative">
+						</ul>
+						<p id="sendwrapper_Negative"><input type='submit' name='form_Negative' value='Submit Negative' /></p>
+					</div>
+				</form>
+			</div>
+
+
+
+	
+		</div>
+	</div>
+</body>
+
+</html>
