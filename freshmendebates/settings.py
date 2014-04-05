@@ -1,7 +1,7 @@
 # Django settings for freshmendebates project.
 import os
 import socket
-import envvars
+#import envvars
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -13,8 +13,10 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-if socket.gethostname() == 'LAMP': # check for production
-    DATABASES = envvars.DATABASES
+#if socket.gethostname() == 'LAMP': # check for production
+#    DATABASES = envvars.DATABASES
+if False:
+    print "What?"
 else:
     DATABASES = {
         'default': {
