@@ -214,3 +214,7 @@ input[type=radio]:checked + label {
 	width: auto;
 
 }
+#Black
+{
+	color: black;
+}

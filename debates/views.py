@@ -9,6 +9,7 @@ from django.forms.extras.widgets import SelectDateWidget
 import datetime
 from django.utils.timezone import utc
 import logging
+from django.template import RequestContext
 
 logger = logging.getLogger('logview.debugger')
 
@@ -128,9 +129,11 @@ def handle(request):
 	})
 
 def splash(request):
+	username = None
+	if request.user.is_authenticated():
+		username = request.user.username
 
-	return render(request,'debates/Splash.html', {
-	})
+	return render(request,'debates/Splash.html', context_instance=RequestContext(request))
 
 def teacher(request):
  	

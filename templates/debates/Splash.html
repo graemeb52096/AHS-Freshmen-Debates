@@ -9,7 +9,12 @@
 </head>
 <body>
 	<div class="Banner">
-		Albany High School Freshmen Debates <a href="{% url 'socialauth_begin' 'google-oauth2' %}">Login with Google</a>
+		Albany High School Freshmen Debates
+		{% if user.is_authenticated %}
+			<h2 id='Black'>Welcome {{ user.first_name }}</h2>
+		{% else %}
+			<a href="{% url 'socialauth_begin' 'google-oauth2' %}">Login with Google</a>
+		{% endif %}
 	</div>
 	<div id="MainBody">
 
