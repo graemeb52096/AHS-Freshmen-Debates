@@ -1,7 +1,7 @@
 # Django settings for freshmendebates project.
 import os
 import socket
-import envvars
+#import envvars
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -18,11 +18,11 @@ if socket.gethostname() == 'LAMP': # check for production
 else:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-            'NAME': 'dev.db',                      # Or path to database file if using sqlite3.
+            'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+            'NAME': 'dev_db',                      # Or path to database file if using sqlite3.
             # The following settings are not used with sqlite3:
-            'USER': '',
-            'PASSWORD': '',
+            'USER': 'dev_user',
+            'PASSWORD': 'dev_2014',
             'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
             'PORT': '',                      # Set to empty string for default.
         }
@@ -76,7 +76,7 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    PROJECT_ROOT + "/freshmendebates/static/",
+    PROJECT_ROOT + "/static/",
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -117,7 +117,7 @@ ROOT_URLCONF = 'freshmendebates.urls'
 WSGI_APPLICATION = 'freshmendebates.wsgi.application'
 
 TEMPLATE_DIRS = (
-    PROJECT_ROOT + "/freshmendebates/templates/debates/"
+    PROJECT_ROOT + "/templates/"
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -139,6 +139,7 @@ INSTALLED_APPS = (
     #'debates.models.User',
     #'django_openid_auth',
     'social_auth',
+	'data_exports',
     #'admin_import',
 )
 

@@ -15,6 +15,8 @@ urlpatterns = patterns('',
 	url(r'^post/scoring_upload$', 'debates.views.handle', name='judging'), 
 	url(r'^NewUserLogIn$', 'debates.views.new_user', name = 'newuser'),
 	url(r'^ExcelUpload$', 'debates.views.test_flowcell', name = 'ExcelUpload'),
+	
+	url(r'^exports/', include('data_exports.urls', namespace='data_exports')),
 	#url(r'^AddStudentsToDataBase2014$', 'debates.views.databasesetup', name = 'data'),
 	#Google login Urls
 

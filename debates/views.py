@@ -86,7 +86,7 @@ def judge(request):
 			msg = "The operation has been received correctly."
 			logger.debug(msg)
 
-	return render(request,'judge.html', {
+	return render(request,'debates/judge.html', {
 		'Affirmative_Form':Affform, 'Negative_Form':Negform,
 	})
 def new_user(request):
