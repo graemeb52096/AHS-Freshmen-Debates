@@ -21,7 +21,7 @@ urlpatterns = patterns('',
 	#Google login Urls
 
 	url(r'', include('social_auth.urls')),
-	url(r'^logout/$', logout, {'next_page': '/'}),
+	url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/SplashPage'}),
 	# url(r'^google/login/$', 'django_social_auth.views.login_begin', name='Social-login'),
 	# url(r'^google/login-complete/$', 'django_social_auth.views.login_complete', name='Social-complete'),
 	# url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/',}, name='logout'),

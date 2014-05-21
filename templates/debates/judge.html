@@ -62,12 +62,12 @@
 				
 
 				<h1>Affirmative</h1>
-				<br>
+		
 
 				    <form method='post' id="form_Positive">
 				    <div id="ajaxwrapper_Positive">
 				    	{% csrf_token %}
-						<br>
+					
 						<br>
 						<ul>
 						{{ Affirmative_Form.as_p }}
@@ -81,11 +81,11 @@
 			<div id="ScoreBoxNeg">
 				
 				<h1>Negative</h1>
-				<br>
+
 					<form method='post' id="form_Negative">
 					<div id="ajaxwrapper_Negative">
 				    	{% csrf_token %}
-						<br>
+				
 						<br>
 						<ul>
 						{{ Negative_Form.as_p }}

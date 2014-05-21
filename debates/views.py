@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from debates.models import Topic,Location,Date,User,Affirmative_form,Negative_form,SubmittedAffirmativeScore,SubmittedNegativeScore,GoogleUser,Student
+from debates.models import Topic,Location,Date,User,Affirmative_form,Negative_form,SubmittedAffirmativeScore,SubmittedNegativeScore,GoogleUser,Student,Team
 from debates.forms import AffirmativeScore,NegativeScore,RegistrationForm,ImportExcelForm
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect, HttpResponse, HttpResponseServerError
@@ -16,8 +16,7 @@ logger = logging.getLogger('logview.debugger')
 
 # Create your views here.
 
-
-#get the debate that are on
+#Judge view loads two seperate forms(which are scoring forms) and then allows for ajax submits. 
 def judge(request):
 	Submit_form = 'null'
 	Affform = AffirmativeScore()
@@ -90,6 +89,7 @@ def judge(request):
 	return render(request,'debates/judge.html', {
 		'Affirmative_Form':Affform, 'Negative_Form':Negform,
 	})
+	
 def new_user(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
@@ -157,8 +157,9 @@ def teamcreate(request):
 	})	
 
 def debateselector(request):
+	teams = Team.objects.all()
 
-	return render(request,'debates/DebateSelector.html', {
+	return render(request,'debates/DebateSelector.html', {'teams':teams
 	})
 
 def test_flowcell(request):

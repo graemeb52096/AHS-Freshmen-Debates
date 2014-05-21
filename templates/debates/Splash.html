@@ -21,19 +21,15 @@
 	</div>
 	<div id="MainBody">
 
-		<div id="SelectT" class="Button">
-			<h1>Teachers</h1>
-			<h2>Manage debate teams, check grades and upcoming debates.</h2>
-			<br>
-		</div>
+	
 		<div id="SelectA" class="Button">
 			<h1>Admin</h1>
-			<h2>Ms. O, log in here to manage debates and organize everything.</h2>
+			<h2></h2>
 			<br>
 		</div>
 		<div id="SelectJ" class="Button">
 			<h1>Judges</h1>
-			<h2>Judge debates, view and manage debates you will judge.</h2>
+			<h2></h2>
 			<br>
 		</div>
 		<br>
@@ -51,18 +47,11 @@
 			window.open ('admin','_self',false)
 		};
 
-		var something = document.getElementById('SelectT');
-
-		something.style.cursor = 'pointer';
-		something.onclick = function() {
-			window.open ('TeacherSelector','_self',false)
-		};
-
 		var something = document.getElementById('SelectJ');
 
 		something.style.cursor = 'pointer';
 		something.onclick = function() {
-			window.open ('DebateSelector','_self',false)
+			window.open ('Judge_nu_scoring','_self',false)
 		};
 
 		var something = document.getElementById('LogIn');

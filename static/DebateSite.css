@@ -6,7 +6,9 @@ body
 }
 h1
 {
-	font-size: 220%;
+	font-size: 150%;
+	font-family:"Times New Roman", Times, serif;
+	font-weight:lighter;
 }
 h2
 {
@@ -43,15 +45,14 @@ th{
 	background-color: #F2EEEA;
 	text-align: center;
 	z-index: 101;
-	margin-top: 0%;
 	font-size: 145%;
 	width: 110%;
 	margin-left: -7%;
 	margin-top: auto;
-	padding: 2.5%;
 	position: fixed;
 	box-shadow: rgba(0, 0, 0, 0.75) 0 5px 35px;
 	color: #E24A37;
+	height: 10%;
 }
 #MainBody
 {	
@@ -60,7 +61,7 @@ th{
 	z-index: 100;
 	background-color: #B4B2AE;
 	height: 58%;
-	width: 70%;
+	width: 95%;
 	margin-top: 0%;
 	margin-bottom: 0%;
 	margin-left: auto;
@@ -71,15 +72,16 @@ th{
 }
 .Button
 {
-	border: 5px solid #E87162;
-	border-radius: 25px;
+	border: 2px solid #F2EEEE;
+	border-radius: 5px;
 	display: inline-block;
 	background-color: #F2EEEA;
 	margin: 1%;
+	padding-top: 5px;
 	padding-left: 10px;
 	padding-right: 10px;
 	width: 25%;
-	height: 35%;
+	height: 20%;
 }
 .Button:hover
 {
