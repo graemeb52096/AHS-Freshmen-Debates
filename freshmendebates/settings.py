@@ -140,6 +140,7 @@ INSTALLED_APPS = (
     #'django_openid_auth',
     'social_auth',
 	'data_exports',
+	'south',
     #'admin_import',
 )
 
@@ -283,10 +284,10 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
-        # 'logview.critical': {
-        #     'handlers': ['dev_critical'],r
-        #     'level': 'CRITICAL',
-        #     'propagate': True,
-        # },
+        'logview.critical': {
+             'handlers': ['dev_critical'],
+             'level': 'CRITICAL',
+             'propagate': True,
+         },
     }
 }

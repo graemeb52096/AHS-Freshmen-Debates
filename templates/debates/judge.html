@@ -9,7 +9,7 @@
 			console.log (form_Negative)
 			form_Negative.submit(function(e){
 				jQuery("#sendbutton_Negative").attr('disabled', true)
-				jQuery("#sendwrapper_Negative").prepend('<span>Sending message, please wait... </span>')
+				jQuery("#sendwrapper_Negative").prepend('<span>Sending scores, please wait... </span>')
 				jQuery("#ajaxwrapper_Negative").load(
 					form_Negative.attr('action') + ' #ajaxwrapper_Negative',
 					form_Negative.serializeArray(),
@@ -28,7 +28,7 @@
 		console.log (form_Positive)
 		form_Positive.submit(function(e){
 			jQuery("#sendbutton_Positive").attr('disabled', true)
-			jQuery("#sendwrapper_Positive").prepend('<span>Sending message, please wait... </span>')
+			jQuery("#sendwrapper_Positive").prepend('<span>Sending scores, please wait... </span>')
 			jQuery("#ajaxwrapper_Positive").load(
 				form_Positive.attr('action') + ' #ajaxwrapper_Positive',
 				form_Positive.serializeArray(),

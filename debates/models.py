@@ -63,7 +63,7 @@ class GoogleUser(models.Model):
 	email = models.CharField(max_length=30)
 	password = models.CharField(max_length=150)
 	date_joined = models.DateTimeField(('date joined'), default=timezone.now)
-	def create_user(self, first_name, last_name, email, password, role):
+	def create_user(first_name, last_name, email, password, role):
 		user = User.objects.create_user(username = first_name, email = email, password = password)
 		user.first_name = first_name
 		user.last_name = last_name
@@ -71,7 +71,7 @@ class GoogleUser(models.Model):
 			user.is_staff = True
 		if role == 1:
 			g = Group.objects.get(name='Teachers') 
-		g.user_set.add(user)
+			g.user_set.add(user)
 		logger.debug('teacher password ' + password)
 		user.save()
 		return user
@@ -159,7 +159,8 @@ class SubmittedAffirmativeScore(models.Model):
 	Argument = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
 	SlideShowScore = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
 	Rebuttal = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
-
+	
+	Notes = models.TextField(max_length = 150)
 	
 	TeamNumber = models.ForeignKey(Team)
 	def __unicode__(self):
@@ -172,6 +173,8 @@ class SubmittedNegativeScore(models.Model):
 	Argument = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
 	SlideShowScore = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
 	Rebuttal = models.CharField(max_length=2, choices=SCORE_CHOICES, default=5)
+	
+	Notes = models.TextField(max_length = 150)
 
 	TeamNumber = models.ForeignKey(Team)
 	def __unicode__(self):
